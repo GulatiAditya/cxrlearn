@@ -1,0 +1,1731 @@
+In base arg: read tasks from constants with dataset ranzcr_catheter: ['ETT - Abnormal', 'ETT - Borderline', 'ETT - Normal', 'NGT - Abnormal', 'NGT - Borderline', 'NGT - Incompletely Imaged', 'NGT - Normal', 'CVC - Abnormal', 'CVC - Borderline', 'CVC - Normal', 'Swan Ganz Catheter Present']
+Start Training ...
+Getting logger... log to path: /deep/group/cxr-transfer/SSL-methods/MedAug/experiments/ranzcr-SSL/train_log.txt
+pretrained checkpoint specified : /deep/group/cxr-transfer/SSL-methods/MedAug/ft_ckpt/checkpoint_0003.pth.tar
+Tasks: ['ETT - Abnormal', 'ETT - Borderline', 'ETT - Normal', 'NGT - Abnormal', 'NGT - Borderline', 'NGT - Incompletely Imaged', 'NGT - Normal', 'CVC - Abnormal', 'CVC - Borderline', 'CVC - Normal', 'Swan Ganz Catheter Present']
+========= MODEL ==========
+DataParallel(
+  (module): ResNet18(
+    (model): ResNet(
+      (conv1): Conv2d(3, 64, kernel_size=(7, 7), stride=(2, 2), padding=(3, 3), bias=False)
+      (bn1): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (relu): ReLU(inplace=True)
+      (maxpool): MaxPool2d(kernel_size=3, stride=2, padding=1, dilation=1, ceil_mode=False)
+      (layer1): Sequential(
+        (0): BasicBlock(
+          (conv1): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+          (bn1): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (relu): ReLU(inplace=True)
+          (conv2): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+          (bn2): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        )
+        (1): BasicBlock(
+          (conv1): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+          (bn1): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (relu): ReLU(inplace=True)
+          (conv2): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+          (bn2): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        )
+      )
+      (layer2): Sequential(
+        (0): BasicBlock(
+          (conv1): Conv2d(64, 128, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), bias=False)
+          (bn1): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (relu): ReLU(inplace=True)
+          (conv2): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+          (bn2): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (downsample): Sequential(
+            (0): Conv2d(64, 128, kernel_size=(1, 1), stride=(2, 2), bias=False)
+            (1): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          )
+        )
+        (1): BasicBlock(
+          (conv1): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+          (bn1): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (relu): ReLU(inplace=True)
+          (conv2): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+          (bn2): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        )
+      )
+      (layer3): Sequential(
+        (0): BasicBlock(
+          (conv1): Conv2d(128, 256, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), bias=False)
+          (bn1): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (relu): ReLU(inplace=True)
+          (conv2): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+          (bn2): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (downsample): Sequential(
+            (0): Conv2d(128, 256, kernel_size=(1, 1), stride=(2, 2), bias=False)
+            (1): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          )
+        )
+        (1): BasicBlock(
+          (conv1): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+          (bn1): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (relu): ReLU(inplace=True)
+          (conv2): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+          (bn2): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        )
+      )
+      (layer4): Sequential(
+        (0): BasicBlock(
+          (conv1): Conv2d(256, 512, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), bias=False)
+          (bn1): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (relu): ReLU(inplace=True)
+          (conv2): Conv2d(512, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+          (bn2): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (downsample): Sequential(
+            (0): Conv2d(256, 512, kernel_size=(1, 1), stride=(2, 2), bias=False)
+            (1): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          )
+        )
+        (1): BasicBlock(
+          (conv1): Conv2d(512, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+          (bn1): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (relu): ReLU(inplace=True)
+          (conv2): Conv2d(512, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+          (bn2): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        )
+      )
+      (avgpool): AdaptiveAvgPool2d(output_size=(1, 1))
+      (fc): None
+      (last_linear): Linear(in_features=512, out_features=1000, bias=True)
+    )
+    (pool): AdaptiveAvgPool2d(output_size=1)
+    (fc): Linear(in_features=512, out_features=11, bias=True)
+  )
+)
+valid /deep/group/cxr-transfer/datasets/ranzcr-clip-catheter-line-classification/valid.csv
+module.model.conv1.weight
+module.model.bn1.weight
+module.model.bn1.bias
+module.model.layer1.0.conv1.weight
+module.model.layer1.0.bn1.weight
+module.model.layer1.0.bn1.bias
+module.model.layer1.0.conv2.weight
+module.model.layer1.0.bn2.weight
+module.model.layer1.0.bn2.bias
+module.model.layer1.1.conv1.weight
+module.model.layer1.1.bn1.weight
+module.model.layer1.1.bn1.bias
+module.model.layer1.1.conv2.weight
+module.model.layer1.1.bn2.weight
+module.model.layer1.1.bn2.bias
+module.model.layer2.0.conv1.weight
+module.model.layer2.0.bn1.weight
+module.model.layer2.0.bn1.bias
+module.model.layer2.0.conv2.weight
+module.model.layer2.0.bn2.weight
+module.model.layer2.0.bn2.bias
+module.model.layer2.0.downsample.0.weight
+module.model.layer2.0.downsample.1.weight
+module.model.layer2.0.downsample.1.bias
+module.model.layer2.1.conv1.weight
+module.model.layer2.1.bn1.weight
+module.model.layer2.1.bn1.bias
+module.model.layer2.1.conv2.weight
+module.model.layer2.1.bn2.weight
+module.model.layer2.1.bn2.bias
+module.model.layer3.0.conv1.weight
+module.model.layer3.0.bn1.weight
+module.model.layer3.0.bn1.bias
+module.model.layer3.0.conv2.weight
+module.model.layer3.0.bn2.weight
+module.model.layer3.0.bn2.bias
+module.model.layer3.0.downsample.0.weight
+module.model.layer3.0.downsample.1.weight
+module.model.layer3.0.downsample.1.bias
+module.model.layer3.1.conv1.weight
+module.model.layer3.1.bn1.weight
+module.model.layer3.1.bn1.bias
+module.model.layer3.1.conv2.weight
+module.model.layer3.1.bn2.weight
+module.model.layer3.1.bn2.bias
+module.model.layer4.0.conv1.weight
+module.model.layer4.0.bn1.weight
+module.model.layer4.0.bn1.bias
+module.model.layer4.0.conv2.weight
+module.model.layer4.0.bn2.weight
+module.model.layer4.0.bn2.bias
+module.model.layer4.0.downsample.0.weight
+module.model.layer4.0.downsample.1.weight
+module.model.layer4.0.downsample.1.bias
+module.model.layer4.1.conv1.weight
+module.model.layer4.1.bn1.weight
+module.model.layer4.1.bn1.bias
+module.model.layer4.1.conv2.weight
+module.model.layer4.1.bn2.weight
+module.model.layer4.1.bn2.bias
+module.model.last_linear.weight
+module.model.last_linear.bias
+module.fc.weight
+module.fc.bias
+evaluator: loss function name: cross_entropy
+[start of epoch 1]
+[epoch: 1, iter: 0 / 23874, time: 0.02, loss: 0.721]
+[epoch: 1, iter: 1024 / 23874, time: 0.00, loss: 0.459]
+[epoch: 1, iter: 2048 / 23874, time: 0.00, loss: 0.312]
+[epoch: 1, iter: 3072 / 23874, time: 0.00, loss: 0.296]
+[epoch: 1, iter: 4096 / 23874, time: 0.00, loss: 0.283]
+[epoch: 1, iter: 5120 / 23874, time: 0.00, loss: 0.274]
+[epoch: 1, iter: 6144 / 23874, time: 0.00, loss: 0.265]
+[epoch: 1, iter: 7168 / 23874, time: 0.00, loss: 0.27]
+[epoch: 1, iter: 8192 / 23874, time: 0.00, loss: 0.262]
+[epoch: 1, iter: 9216 / 23874, time: 0.00, loss: 0.263]
+[epoch: 1, iter: 10240 / 23874, time: 0.00, loss: 0.267]
+[epoch: 1, iter: 11264 / 23874, time: 0.00, loss: 0.266]
+[epoch: 1, iter: 12288 / 23874, time: 0.00, loss: 0.256]
+[epoch: 1, iter: 13312 / 23874, time: 0.00, loss: 0.264]
+[epoch: 1, iter: 14336 / 23874, time: 0.00, loss: 0.255]
+[epoch: 1, iter: 15360 / 23874, time: 0.00, loss: 0.265]
+[epoch: 1, iter: 16384 / 23874, time: 0.00, loss: 0.248]
+[epoch: 1, iter: 17408 / 23874, time: 0.00, loss: 0.254]
+[epoch: 1, iter: 18432 / 23874, time: 0.00, loss: 0.249]
+[epoch: 1, iter: 19456 / 23874, time: 0.00, loss: 0.258]
+[epoch: 1, iter: 20480 / 23874, time: 0.00, loss: 0.263]
+[epoch: 1, iter: 21504 / 23874, time: 0.00, loss: 0.256]
+[epoch: 1, iter: 22528 / 23874, time: 0.00, loss: 0.255]
+[epoch: 1, iter: 23552 / 23874, time: 0.00, loss: 0.256]
+  0%|          | 0/200 [00:00<?, ?it/s] 16%|█▌        | 32/200 [00:00<00:03, 52.91it/s] 48%|████▊     | 96/200 [00:00<00:01, 71.78it/s] 80%|████████  | 160/200 [00:00<00:00, 95.23it/s]100%|██████████| 200/200 [00:01<00:00, 106.41it/s]100%|██████████| 200/200 [00:01<00:00, 158.50it/s]
+Evaluating task: ETT - Abnormal
+Evaluating metric: AUPRC
+/sailhome/adgulati/miniconda3/envs/medaug-env/lib/python3.7/site-packages/sklearn/metrics/_ranking.py:677: RuntimeWarning: invalid value encountered in true_divide
+  recall = tps / tps[-1]
+Evaluating metric: AUROC
+Evaluating metric: log_loss
+Evaluating metric: accuracy
+Evaluating metric: precision
+/sailhome/adgulati/miniconda3/envs/medaug-env/lib/python3.7/site-packages/sklearn/metrics/_classification.py:1272: UndefinedMetricWarning: Precision is ill-defined and being set to 0.0 due to no predicted samples. Use `zero_division` parameter to control this behavior.
+  _warn_prf(average, modifier, msg_start, len(result))
+Evaluating metric: recall
+/sailhome/adgulati/miniconda3/envs/medaug-env/lib/python3.7/site-packages/sklearn/metrics/_classification.py:1272: UndefinedMetricWarning: Recall is ill-defined and being set to 0.0 due to no true samples. Use `zero_division` parameter to control this behavior.
+  _warn_prf(average, modifier, msg_start, len(result))
+Evaluating metric: PRC
+/sailhome/adgulati/miniconda3/envs/medaug-env/lib/python3.7/site-packages/sklearn/metrics/_ranking.py:677: RuntimeWarning: invalid value encountered in true_divide
+  recall = tps / tps[-1]
+Evaluating metric: ROC
+/sailhome/adgulati/miniconda3/envs/medaug-env/lib/python3.7/site-packages/sklearn/metrics/_ranking.py:808: UndefinedMetricWarning: No positive samples in y_true, true positive value should be meaningless
+  UndefinedMetricWarning)
+Evaluating task: ETT - Borderline
+Evaluating metric: AUPRC
+Evaluating metric: AUROC
+Evaluating metric: log_loss
+Evaluating metric: accuracy
+Evaluating metric: precision
+/sailhome/adgulati/miniconda3/envs/medaug-env/lib/python3.7/site-packages/sklearn/metrics/_classification.py:1272: UndefinedMetricWarning: Precision is ill-defined and being set to 0.0 due to no predicted samples. Use `zero_division` parameter to control this behavior.
+  _warn_prf(average, modifier, msg_start, len(result))
+Evaluating metric: recall
+Evaluating metric: PRC
+Evaluating metric: ROC
+Evaluating task: ETT - Normal
+Evaluating metric: AUPRC
+Evaluating metric: AUROC
+Evaluating metric: log_loss
+Evaluating metric: accuracy
+Evaluating metric: precision
+Evaluating metric: recall
+Evaluating metric: PRC
+Evaluating metric: ROC
+Evaluating task: NGT - Abnormal
+Evaluating metric: AUPRC
+Evaluating metric: AUROC
+Evaluating metric: log_loss
+Evaluating metric: accuracy
+Evaluating metric: precision
+/sailhome/adgulati/miniconda3/envs/medaug-env/lib/python3.7/site-packages/sklearn/metrics/_classification.py:1272: UndefinedMetricWarning: Precision is ill-defined and being set to 0.0 due to no predicted samples. Use `zero_division` parameter to control this behavior.
+  _warn_prf(average, modifier, msg_start, len(result))
+Evaluating metric: recall
+Evaluating metric: PRC
+Evaluating metric: ROC
+Evaluating task: NGT - Borderline
+Evaluating metric: AUPRC
+Evaluating metric: AUROC
+Evaluating metric: log_loss
+Evaluating metric: accuracy
+Evaluating metric: precision
+/sailhome/adgulati/miniconda3/envs/medaug-env/lib/python3.7/site-packages/sklearn/metrics/_classification.py:1272: UndefinedMetricWarning: Precision is ill-defined and being set to 0.0 due to no predicted samples. Use `zero_division` parameter to control this behavior.
+  _warn_prf(average, modifier, msg_start, len(result))
+Evaluating metric: recall
+Evaluating metric: PRC
+Evaluating metric: ROC
+Evaluating task: NGT - Incompletely Imaged
+Evaluating metric: AUPRC
+Evaluating metric: AUROC
+Evaluating metric: log_loss
+Evaluating metric: accuracy
+Evaluating metric: precision
+Evaluating metric: recall
+Evaluating metric: PRC
+Evaluating metric: ROC
+Evaluating task: NGT - Normal
+Evaluating metric: AUPRC
+Evaluating metric: AUROC
+Evaluating metric: log_loss
+Evaluating metric: accuracy
+Evaluating metric: precision
+Evaluating metric: recall
+Evaluating metric: PRC
+Evaluating metric: ROC
+Evaluating task: CVC - Abnormal
+Evaluating metric: AUPRC
+Evaluating metric: AUROC
+Evaluating metric: log_loss
+Evaluating metric: accuracy
+Evaluating metric: precision
+/sailhome/adgulati/miniconda3/envs/medaug-env/lib/python3.7/site-packages/sklearn/metrics/_classification.py:1272: UndefinedMetricWarning: Precision is ill-defined and being set to 0.0 due to no predicted samples. Use `zero_division` parameter to control this behavior.
+  _warn_prf(average, modifier, msg_start, len(result))
+Evaluating metric: recall
+Evaluating metric: PRC
+Evaluating metric: ROC
+Evaluating task: CVC - Borderline
+Evaluating metric: AUPRC
+Evaluating metric: AUROC
+Evaluating metric: log_loss
+Evaluating metric: accuracy
+Evaluating metric: precision
+/sailhome/adgulati/miniconda3/envs/medaug-env/lib/python3.7/site-packages/sklearn/metrics/_classification.py:1272: UndefinedMetricWarning: Precision is ill-defined and being set to 0.0 due to no predicted samples. Use `zero_division` parameter to control this behavior.
+  _warn_prf(average, modifier, msg_start, len(result))
+Evaluating metric: recall
+Evaluating metric: PRC
+Evaluating metric: ROC
+Evaluating task: CVC - Normal
+Evaluating metric: AUPRC
+Evaluating metric: AUROC
+Evaluating metric: log_loss
+Evaluating metric: accuracy
+Evaluating metric: precision
+Evaluating metric: recall
+Evaluating metric: PRC
+Evaluating metric: ROC
+Evaluating task: Swan Ganz Catheter Present
+Evaluating metric: AUPRC
+Evaluating metric: AUROC
+Evaluating metric: log_loss
+Evaluating metric: accuracy
+Evaluating metric: precision
+/sailhome/adgulati/miniconda3/envs/medaug-env/lib/python3.7/site-packages/sklearn/metrics/_classification.py:1272: UndefinedMetricWarning: Precision is ill-defined and being set to 0.0 due to no predicted samples. Use `zero_division` parameter to control this behavior.
+  _warn_prf(average, modifier, msg_start, len(result))
+Evaluating metric: recall
+Evaluating metric: PRC
+Evaluating metric: ROC
+[ETT - Abnormal:AUPRC:	nan]
+[ETT - Abnormal:AUROC:	nan]
+[ETT - Abnormal:log_loss:	nan]
+[ETT - Abnormal:accuracy@thresh=0.5:	1.0]
+[ETT - Abnormal:precision@thresh=0.5:	0.0]
+[ETT - Abnormal:recall@thresh=0.5:	0.0]
+[ETT - Borderline:AUPRC:	0.25288309516570384]
+[ETT - Borderline:AUROC:	0.8378978534418949]
+[ETT - Borderline:log_loss:	0.12605614376603624]
+[ETT - Borderline:accuracy@thresh=0.5:	0.965]
+[ETT - Borderline:precision@thresh=0.5:	0.0]
+[ETT - Borderline:recall@thresh=0.5:	0.0]
+[ETT - Normal:AUPRC:	0.6510888833168882]
+[ETT - Normal:AUROC:	0.9298369950389794]
+[ETT - Normal:log_loss:	0.27225933069596064]
+[ETT - Normal:accuracy@thresh=0.5:	0.865]
+[ETT - Normal:precision@thresh=0.5:	0.5777777777777777]
+[ETT - Normal:recall@thresh=0.5:	0.7647058823529411]
+[NGT - Abnormal:AUPRC:	0.07142857142857142]
+[NGT - Abnormal:AUROC:	0.9346733668341709]
+[NGT - Abnormal:log_loss:	0.030821442108717748]
+[NGT - Abnormal:accuracy@thresh=0.5:	0.995]
+[NGT - Abnormal:precision@thresh=0.5:	0.0]
+[NGT - Abnormal:recall@thresh=0.5:	0.0]
+[NGT - Borderline:AUPRC:	0.05872719536232091]
+[NGT - Borderline:AUROC:	0.5097435897435898]
+[NGT - Borderline:log_loss:	0.12452807001885959]
+[NGT - Borderline:accuracy@thresh=0.5:	0.975]
+[NGT - Borderline:precision@thresh=0.5:	0.0]
+[NGT - Borderline:recall@thresh=0.5:	0.0]
+[NGT - Incompletely Imaged:AUPRC:	0.31862281586901176]
+[NGT - Incompletely Imaged:AUROC:	0.8893459481694777]
+[NGT - Incompletely Imaged:log_loss:	0.17540642850799487]
+[NGT - Incompletely Imaged:accuracy@thresh=0.5:	0.93]
+[NGT - Incompletely Imaged:precision@thresh=0.5:	0.0]
+[NGT - Incompletely Imaged:recall@thresh=0.5:	0.0]
+[NGT - Normal:AUPRC:	0.5316989096373367]
+[NGT - Normal:AUROC:	0.8701714285714286]
+[NGT - Normal:log_loss:	0.2699426365084946]
+[NGT - Normal:accuracy@thresh=0.5:	0.875]
+[NGT - Normal:precision@thresh=0.5:	0.5]
+[NGT - Normal:recall@thresh=0.5:	0.28]
+[CVC - Abnormal:AUPRC:	0.09685942386348134]
+[CVC - Abnormal:AUROC:	0.42977609770282055]
+[CVC - Abnormal:log_loss:	0.331162316435948]
+[CVC - Abnormal:accuracy@thresh=0.5:	0.905]
+[CVC - Abnormal:precision@thresh=0.5:	0.0]
+[CVC - Abnormal:recall@thresh=0.5:	0.0]
+[CVC - Borderline:AUPRC:	0.34346137883035655]
+[CVC - Borderline:AUROC:	0.6239744124600195]
+[CVC - Borderline:log_loss:	0.5319853842630983]
+[CVC - Borderline:accuracy@thresh=0.5:	0.765]
+[CVC - Borderline:precision@thresh=0.5:	0.0]
+[CVC - Borderline:recall@thresh=0.5:	0.0]
+[CVC - Normal:AUPRC:	0.7776974744886296]
+[CVC - Normal:AUROC:	0.5695032730073161]
+[CVC - Normal:log_loss:	0.5715575636923313]
+[CVC - Normal:accuracy@thresh=0.5:	0.735]
+[CVC - Normal:precision@thresh=0.5:	0.735]
+[CVC - Normal:recall@thresh=0.5:	1.0]
+[Swan Ganz Catheter Present:AUPRC:	0.240831964969896]
+[Swan Ganz Catheter Present:AUROC:	0.9441624365482234]
+[Swan Ganz Catheter Present:log_loss:	0.06112819080939516]
+[Swan Ganz Catheter Present:accuracy@thresh=0.5:	0.985]
+[Swan Ganz Catheter Present:precision@thresh=0.5:	0.0]
+[Swan Ganz Catheter Present:recall@thresh=0.5:	0.0]
+[ETT - Abnormal:AUPRC: nan]
+WARNING:root:NaN or Inf found in input tensor.
+[ETT - Abnormal:AUROC: nan]
+WARNING:root:NaN or Inf found in input tensor.
+[ETT - Abnormal:log_loss: nan]
+WARNING:root:NaN or Inf found in input tensor.
+[ETT - Abnormal:accuracy@thresh=0.5: 1]
+[ETT - Abnormal:precision@thresh=0.5: 0]
+[ETT - Abnormal:recall@thresh=0.5: 0]
+[ETT - Borderline:AUPRC: 0.253]
+[ETT - Borderline:AUROC: 0.838]
+[ETT - Borderline:log_loss: 0.126]
+[ETT - Borderline:accuracy@thresh=0.5: 0.965]
+[ETT - Borderline:precision@thresh=0.5: 0]
+[ETT - Borderline:recall@thresh=0.5: 0]
+[ETT - Normal:AUPRC: 0.651]
+[ETT - Normal:AUROC: 0.93]
+[ETT - Normal:log_loss: 0.272]
+[ETT - Normal:accuracy@thresh=0.5: 0.865]
+[ETT - Normal:precision@thresh=0.5: 0.578]
+[ETT - Normal:recall@thresh=0.5: 0.765]
+[NGT - Abnormal:AUPRC: 0.0714]
+[NGT - Abnormal:AUROC: 0.935]
+[NGT - Abnormal:log_loss: 0.0308]
+[NGT - Abnormal:accuracy@thresh=0.5: 0.995]
+[NGT - Abnormal:precision@thresh=0.5: 0]
+[NGT - Abnormal:recall@thresh=0.5: 0]
+[NGT - Borderline:AUPRC: 0.0587]
+[NGT - Borderline:AUROC: 0.51]
+[NGT - Borderline:log_loss: 0.125]
+[NGT - Borderline:accuracy@thresh=0.5: 0.975]
+[NGT - Borderline:precision@thresh=0.5: 0]
+[NGT - Borderline:recall@thresh=0.5: 0]
+[NGT - Incompletely Imaged:AUPRC: 0.319]
+[NGT - Incompletely Imaged:AUROC: 0.889]
+[NGT - Incompletely Imaged:log_loss: 0.175]
+[NGT - Incompletely Imaged:accuracy@thresh=0.5: 0.93]
+[NGT - Incompletely Imaged:precision@thresh=0.5: 0]
+[NGT - Incompletely Imaged:recall@thresh=0.5: 0]
+[NGT - Normal:AUPRC: 0.532]
+[NGT - Normal:AUROC: 0.87]
+[NGT - Normal:log_loss: 0.27]
+[NGT - Normal:accuracy@thresh=0.5: 0.875]
+[NGT - Normal:precision@thresh=0.5: 0.5]
+[NGT - Normal:recall@thresh=0.5: 0.28]
+[CVC - Abnormal:AUPRC: 0.0969]
+[CVC - Abnormal:AUROC: 0.43]
+[CVC - Abnormal:log_loss: 0.331]
+[CVC - Abnormal:accuracy@thresh=0.5: 0.905]
+[CVC - Abnormal:precision@thresh=0.5: 0]
+[CVC - Abnormal:recall@thresh=0.5: 0]
+[CVC - Borderline:AUPRC: 0.343]
+[CVC - Borderline:AUROC: 0.624]
+[CVC - Borderline:log_loss: 0.532]
+[CVC - Borderline:accuracy@thresh=0.5: 0.765]
+[CVC - Borderline:precision@thresh=0.5: 0]
+[CVC - Borderline:recall@thresh=0.5: 0]
+[CVC - Normal:AUPRC: 0.778]
+[CVC - Normal:AUROC: 0.57]
+[CVC - Normal:log_loss: 0.572]
+[CVC - Normal:accuracy@thresh=0.5: 0.735]
+[CVC - Normal:precision@thresh=0.5: 0.735]
+[CVC - Normal:recall@thresh=0.5: 1]
+[Swan Ganz Catheter Present:AUPRC: 0.241]
+[Swan Ganz Catheter Present:AUROC: 0.944]
+[Swan Ganz Catheter Present:log_loss: 0.0611]
+[Swan Ganz Catheter Present:accuracy@thresh=0.5: 0.985]
+[Swan Ganz Catheter Present:precision@thresh=0.5: 0]
+[Swan Ganz Catheter Present:recall@thresh=0.5: 0]
+[start of epoch 2]
+[epoch: 2, iter: 0 / 23874, time: 0.00, loss: 0.237]
+[epoch: 2, iter: 1024 / 23874, time: 0.00, loss: 0.262]
+[epoch: 2, iter: 2048 / 23874, time: 0.00, loss: 0.253]
+[epoch: 2, iter: 3072 / 23874, time: 0.00, loss: 0.253]
+[epoch: 2, iter: 4096 / 23874, time: 0.00, loss: 0.246]
+[epoch: 2, iter: 5120 / 23874, time: 0.00, loss: 0.249]
+[epoch: 2, iter: 6144 / 23874, time: 0.00, loss: 0.253]
+[epoch: 2, iter: 7168 / 23874, time: 0.00, loss: 0.24]
+[epoch: 2, iter: 8192 / 23874, time: 0.00, loss: 0.248]
+  0%|          | 0/200 [00:00<?, ?it/s] 16%|█▌        | 32/200 [00:00<00:03, 51.32it/s] 48%|████▊     | 96/200 [00:00<00:01, 69.66it/s] 80%|████████  | 160/200 [00:00<00:00, 93.45it/s]100%|██████████| 200/200 [00:01<00:00, 183.31it/s]
+Evaluating task: ETT - Abnormal
+Evaluating metric: AUPRC
+/sailhome/adgulati/miniconda3/envs/medaug-env/lib/python3.7/site-packages/sklearn/metrics/_ranking.py:677: RuntimeWarning: invalid value encountered in true_divide
+  recall = tps / tps[-1]
+Evaluating metric: AUROC
+Evaluating metric: log_loss
+Evaluating metric: accuracy
+Evaluating metric: precision
+/sailhome/adgulati/miniconda3/envs/medaug-env/lib/python3.7/site-packages/sklearn/metrics/_classification.py:1272: UndefinedMetricWarning: Precision is ill-defined and being set to 0.0 due to no predicted samples. Use `zero_division` parameter to control this behavior.
+  _warn_prf(average, modifier, msg_start, len(result))
+Evaluating metric: recall
+/sailhome/adgulati/miniconda3/envs/medaug-env/lib/python3.7/site-packages/sklearn/metrics/_classification.py:1272: UndefinedMetricWarning: Recall is ill-defined and being set to 0.0 due to no true samples. Use `zero_division` parameter to control this behavior.
+  _warn_prf(average, modifier, msg_start, len(result))
+Evaluating metric: PRC
+/sailhome/adgulati/miniconda3/envs/medaug-env/lib/python3.7/site-packages/sklearn/metrics/_ranking.py:677: RuntimeWarning: invalid value encountered in true_divide
+  recall = tps / tps[-1]
+Evaluating metric: ROC
+/sailhome/adgulati/miniconda3/envs/medaug-env/lib/python3.7/site-packages/sklearn/metrics/_ranking.py:808: UndefinedMetricWarning: No positive samples in y_true, true positive value should be meaningless
+  UndefinedMetricWarning)
+Evaluating task: ETT - Borderline
+Evaluating metric: AUPRC
+Evaluating metric: AUROC
+Evaluating metric: log_loss
+Evaluating metric: accuracy
+Evaluating metric: precision
+/sailhome/adgulati/miniconda3/envs/medaug-env/lib/python3.7/site-packages/sklearn/metrics/_classification.py:1272: UndefinedMetricWarning: Precision is ill-defined and being set to 0.0 due to no predicted samples. Use `zero_division` parameter to control this behavior.
+  _warn_prf(average, modifier, msg_start, len(result))
+Evaluating metric: recall
+Evaluating metric: PRC
+Evaluating metric: ROC
+Evaluating task: ETT - Normal
+Evaluating metric: AUPRC
+Evaluating metric: AUROC
+Evaluating metric: log_loss
+Evaluating metric: accuracy
+Evaluating metric: precision
+Evaluating metric: recall
+Evaluating metric: PRC
+Evaluating metric: ROC
+Evaluating task: NGT - Abnormal
+Evaluating metric: AUPRC
+Evaluating metric: AUROC
+Evaluating metric: log_loss
+Evaluating metric: accuracy
+Evaluating metric: precision
+/sailhome/adgulati/miniconda3/envs/medaug-env/lib/python3.7/site-packages/sklearn/metrics/_classification.py:1272: UndefinedMetricWarning: Precision is ill-defined and being set to 0.0 due to no predicted samples. Use `zero_division` parameter to control this behavior.
+  _warn_prf(average, modifier, msg_start, len(result))
+Evaluating metric: recall
+Evaluating metric: PRC
+Evaluating metric: ROC
+Evaluating task: NGT - Borderline
+Evaluating metric: AUPRC
+Evaluating metric: AUROC
+Evaluating metric: log_loss
+Evaluating metric: accuracy
+Evaluating metric: precision
+/sailhome/adgulati/miniconda3/envs/medaug-env/lib/python3.7/site-packages/sklearn/metrics/_classification.py:1272: UndefinedMetricWarning: Precision is ill-defined and being set to 0.0 due to no predicted samples. Use `zero_division` parameter to control this behavior.
+  _warn_prf(average, modifier, msg_start, len(result))
+Evaluating metric: recall
+Evaluating metric: PRC
+Evaluating metric: ROC
+Evaluating task: NGT - Incompletely Imaged
+Evaluating metric: AUPRC
+Evaluating metric: AUROC
+Evaluating metric: log_loss
+Evaluating metric: accuracy
+Evaluating metric: precision
+Evaluating metric: recall
+Evaluating metric: PRC
+Evaluating metric: ROC
+Evaluating task: NGT - Normal
+Evaluating metric: AUPRC
+Evaluating metric: AUROC
+Evaluating metric: log_loss
+Evaluating metric: accuracy
+Evaluating metric: precision
+Evaluating metric: recall
+Evaluating metric: PRC
+Evaluating metric: ROC
+Evaluating task: CVC - Abnormal
+Evaluating metric: AUPRC
+Evaluating metric: AUROC
+Evaluating metric: log_loss
+Evaluating metric: accuracy
+Evaluating metric: precision
+/sailhome/adgulati/miniconda3/envs/medaug-env/lib/python3.7/site-packages/sklearn/metrics/_classification.py:1272: UndefinedMetricWarning: Precision is ill-defined and being set to 0.0 due to no predicted samples. Use `zero_division` parameter to control this behavior.
+  _warn_prf(average, modifier, msg_start, len(result))
+Evaluating metric: recall
+Evaluating metric: PRC
+Evaluating metric: ROC
+Evaluating task: CVC - Borderline
+Evaluating metric: AUPRC
+Evaluating metric: AUROC
+Evaluating metric: log_loss
+Evaluating metric: accuracy
+Evaluating metric: precision
+/sailhome/adgulati/miniconda3/envs/medaug-env/lib/python3.7/site-packages/sklearn/metrics/_classification.py:1272: UndefinedMetricWarning: Precision is ill-defined and being set to 0.0 due to no predicted samples. Use `zero_division` parameter to control this behavior.
+  _warn_prf(average, modifier, msg_start, len(result))
+Evaluating metric: recall
+Evaluating metric: PRC
+Evaluating metric: ROC
+Evaluating task: CVC - Normal
+Evaluating metric: AUPRC
+Evaluating metric: AUROC
+Evaluating metric: log_loss
+Evaluating metric: accuracy
+Evaluating metric: precision
+Evaluating metric: recall
+Evaluating metric: PRC
+Evaluating metric: ROC
+Evaluating task: Swan Ganz Catheter Present
+Evaluating metric: AUPRC
+Evaluating metric: AUROC
+Evaluating metric: log_loss
+Evaluating metric: accuracy
+Evaluating metric: precision
+/sailhome/adgulati/miniconda3/envs/medaug-env/lib/python3.7/site-packages/sklearn/metrics/_classification.py:1272: UndefinedMetricWarning: Precision is ill-defined and being set to 0.0 due to no predicted samples. Use `zero_division` parameter to control this behavior.
+  _warn_prf(average, modifier, msg_start, len(result))
+Evaluating metric: recall
+Evaluating metric: PRC
+Evaluating metric: ROC
+[ETT - Abnormal:AUPRC:	nan]
+[ETT - Abnormal:AUROC:	nan]
+[ETT - Abnormal:log_loss:	nan]
+[ETT - Abnormal:accuracy@thresh=0.5:	1.0]
+[ETT - Abnormal:precision@thresh=0.5:	0.0]
+[ETT - Abnormal:recall@thresh=0.5:	0.0]
+[ETT - Borderline:AUPRC:	0.26087050204697265]
+[ETT - Borderline:AUROC:	0.848260547742413]
+[ETT - Borderline:log_loss:	0.12409088625165168]
+[ETT - Borderline:accuracy@thresh=0.5:	0.965]
+[ETT - Borderline:precision@thresh=0.5:	0.0]
+[ETT - Borderline:recall@thresh=0.5:	0.0]
+[ETT - Normal:AUPRC:	0.6632630418920213]
+[ETT - Normal:AUROC:	0.9335577604535791]
+[ETT - Normal:log_loss:	0.26307436358649283]
+[ETT - Normal:accuracy@thresh=0.5:	0.86]
+[ETT - Normal:precision@thresh=0.5:	0.5681818181818182]
+[ETT - Normal:recall@thresh=0.5:	0.7352941176470589]
+[NGT - Abnormal:AUPRC:	0.0625]
+[NGT - Abnormal:AUROC:	0.9246231155778895]
+[NGT - Abnormal:log_loss:	0.028888342633727006]
+[NGT - Abnormal:accuracy@thresh=0.5:	0.995]
+[NGT - Abnormal:precision@thresh=0.5:	0.0]
+[NGT - Abnormal:recall@thresh=0.5:	0.0]
+[NGT - Borderline:AUPRC:	0.05944766016642072]
+[NGT - Borderline:AUROC:	0.6]
+[NGT - Borderline:log_loss:	0.11935690362239257]
+[NGT - Borderline:accuracy@thresh=0.5:	0.975]
+[NGT - Borderline:precision@thresh=0.5:	0.0]
+[NGT - Borderline:recall@thresh=0.5:	0.0]
+[NGT - Incompletely Imaged:AUPRC:	0.3736131254429833]
+[NGT - Incompletely Imaged:AUROC:	0.8971616618675443]
+[NGT - Incompletely Imaged:log_loss:	0.17634206166490912]
+[NGT - Incompletely Imaged:accuracy@thresh=0.5:	0.935]
+[NGT - Incompletely Imaged:precision@thresh=0.5:	0.5]
+[NGT - Incompletely Imaged:recall@thresh=0.5:	0.07692307692307693]
+[NGT - Normal:AUPRC:	0.5125347842912364]
+[NGT - Normal:AUROC:	0.8749714285714285]
+[NGT - Normal:log_loss:	0.26615351578569973]
+[NGT - Normal:accuracy@thresh=0.5:	0.89]
+[NGT - Normal:precision@thresh=0.5:	0.6]
+[NGT - Normal:recall@thresh=0.5:	0.36]
+[CVC - Abnormal:AUPRC:	0.09674437203871848]
+[CVC - Abnormal:AUROC:	0.44111660366385574]
+[CVC - Abnormal:log_loss:	0.33210906454361977]
+[CVC - Abnormal:accuracy@thresh=0.5:	0.905]
+[CVC - Abnormal:precision@thresh=0.5:	0.0]
+[CVC - Abnormal:recall@thresh=0.5:	0.0]
+[CVC - Borderline:AUPRC:	0.3334888663779929]
+[CVC - Borderline:AUROC:	0.6225837852871645]
+[CVC - Borderline:log_loss:	0.5363567499816417]
+[CVC - Borderline:accuracy@thresh=0.5:	0.765]
+[CVC - Borderline:precision@thresh=0.5:	0.0]
+[CVC - Borderline:recall@thresh=0.5:	0.0]
+[CVC - Normal:AUPRC:	0.7848386058281576]
+[CVC - Normal:AUROC:	0.5716852778847388]
+[CVC - Normal:log_loss:	0.573600895255804]
+[CVC - Normal:accuracy@thresh=0.5:	0.735]
+[CVC - Normal:precision@thresh=0.5:	0.735]
+[CVC - Normal:recall@thresh=0.5:	1.0]
+[Swan Ganz Catheter Present:AUPRC:	0.24801587301587302]
+[Swan Ganz Catheter Present:AUROC:	0.9526226734348562]
+[Swan Ganz Catheter Present:log_loss:	0.05603496602037922]
+[Swan Ganz Catheter Present:accuracy@thresh=0.5:	0.985]
+[Swan Ganz Catheter Present:precision@thresh=0.5:	0.0]
+[Swan Ganz Catheter Present:recall@thresh=0.5:	0.0]
+[ETT - Abnormal:AUPRC: nan]
+WARNING:root:NaN or Inf found in input tensor.
+[ETT - Abnormal:AUROC: nan]
+WARNING:root:NaN or Inf found in input tensor.
+[ETT - Abnormal:log_loss: nan]
+WARNING:root:NaN or Inf found in input tensor.
+[ETT - Abnormal:accuracy@thresh=0.5: 1]
+[ETT - Abnormal:precision@thresh=0.5: 0]
+[ETT - Abnormal:recall@thresh=0.5: 0]
+[ETT - Borderline:AUPRC: 0.261]
+[ETT - Borderline:AUROC: 0.848]
+[ETT - Borderline:log_loss: 0.124]
+[ETT - Borderline:accuracy@thresh=0.5: 0.965]
+[ETT - Borderline:precision@thresh=0.5: 0]
+[ETT - Borderline:recall@thresh=0.5: 0]
+[ETT - Normal:AUPRC: 0.663]
+[ETT - Normal:AUROC: 0.934]
+[ETT - Normal:log_loss: 0.263]
+[ETT - Normal:accuracy@thresh=0.5: 0.86]
+[ETT - Normal:precision@thresh=0.5: 0.568]
+[ETT - Normal:recall@thresh=0.5: 0.735]
+[NGT - Abnormal:AUPRC: 0.0625]
+[NGT - Abnormal:AUROC: 0.925]
+[NGT - Abnormal:log_loss: 0.0289]
+[NGT - Abnormal:accuracy@thresh=0.5: 0.995]
+[NGT - Abnormal:precision@thresh=0.5: 0]
+[NGT - Abnormal:recall@thresh=0.5: 0]
+[NGT - Borderline:AUPRC: 0.0594]
+[NGT - Borderline:AUROC: 0.6]
+[NGT - Borderline:log_loss: 0.119]
+[NGT - Borderline:accuracy@thresh=0.5: 0.975]
+[NGT - Borderline:precision@thresh=0.5: 0]
+[NGT - Borderline:recall@thresh=0.5: 0]
+[NGT - Incompletely Imaged:AUPRC: 0.374]
+[NGT - Incompletely Imaged:AUROC: 0.897]
+[NGT - Incompletely Imaged:log_loss: 0.176]
+[NGT - Incompletely Imaged:accuracy@thresh=0.5: 0.935]
+[NGT - Incompletely Imaged:precision@thresh=0.5: 0.5]
+[NGT - Incompletely Imaged:recall@thresh=0.5: 0.0769]
+[NGT - Normal:AUPRC: 0.513]
+[NGT - Normal:AUROC: 0.875]
+[NGT - Normal:log_loss: 0.266]
+[NGT - Normal:accuracy@thresh=0.5: 0.89]
+[NGT - Normal:precision@thresh=0.5: 0.6]
+[NGT - Normal:recall@thresh=0.5: 0.36]
+[CVC - Abnormal:AUPRC: 0.0967]
+[CVC - Abnormal:AUROC: 0.441]
+[CVC - Abnormal:log_loss: 0.332]
+[CVC - Abnormal:accuracy@thresh=0.5: 0.905]
+[CVC - Abnormal:precision@thresh=0.5: 0]
+[CVC - Abnormal:recall@thresh=0.5: 0]
+[CVC - Borderline:AUPRC: 0.333]
+[CVC - Borderline:AUROC: 0.623]
+[CVC - Borderline:log_loss: 0.536]
+[CVC - Borderline:accuracy@thresh=0.5: 0.765]
+[CVC - Borderline:precision@thresh=0.5: 0]
+[CVC - Borderline:recall@thresh=0.5: 0]
+[CVC - Normal:AUPRC: 0.785]
+[CVC - Normal:AUROC: 0.572]
+[CVC - Normal:log_loss: 0.574]
+[CVC - Normal:accuracy@thresh=0.5: 0.735]
+[CVC - Normal:precision@thresh=0.5: 0.735]
+[CVC - Normal:recall@thresh=0.5: 1]
+[Swan Ganz Catheter Present:AUPRC: 0.248]
+[Swan Ganz Catheter Present:AUROC: 0.953]
+[Swan Ganz Catheter Present:log_loss: 0.056]
+[Swan Ganz Catheter Present:accuracy@thresh=0.5: 0.985]
+[Swan Ganz Catheter Present:precision@thresh=0.5: 0]
+[Swan Ganz Catheter Present:recall@thresh=0.5: 0]
+Save global step: 32768
+Saver -- save checkpoint: /deep/group/cxr-transfer/SSL-methods/MedAug/experiments/ranzcr-SSL/iter_32768.pth.tar
+Path /deep/group/cxr-transfer/SSL-methods/MedAug/experiments/ranzcr-SSL already exists
+[epoch: 2, iter: 9216 / 23874, time: 0.00, loss: 0.25]
+[epoch: 2, iter: 10240 / 23874, time: 0.00, loss: 0.242]
+[epoch: 2, iter: 11264 / 23874, time: 0.00, loss: 0.234]
+[epoch: 2, iter: 12288 / 23874, time: 0.00, loss: 0.246]
+[epoch: 2, iter: 13312 / 23874, time: 0.00, loss: 0.257]
+[epoch: 2, iter: 14336 / 23874, time: 0.00, loss: 0.249]
+[epoch: 2, iter: 15360 / 23874, time: 0.00, loss: 0.247]
+[epoch: 2, iter: 16384 / 23874, time: 0.00, loss: 0.249]
+[epoch: 2, iter: 17408 / 23874, time: 0.00, loss: 0.252]
+[epoch: 2, iter: 18432 / 23874, time: 0.00, loss: 0.252]
+[epoch: 2, iter: 19456 / 23874, time: 0.00, loss: 0.237]
+[epoch: 2, iter: 20480 / 23874, time: 0.00, loss: 0.247]
+[epoch: 2, iter: 21504 / 23874, time: 0.00, loss: 0.253]
+[epoch: 2, iter: 22528 / 23874, time: 0.00, loss: 0.239]
+[epoch: 2, iter: 23552 / 23874, time: 0.00, loss: 0.241]
+  0%|          | 0/200 [00:00<?, ?it/s] 16%|█▌        | 32/200 [00:00<00:03, 50.82it/s] 48%|████▊     | 96/200 [00:00<00:01, 69.11it/s] 80%|████████  | 160/200 [00:00<00:00, 92.45it/s]100%|██████████| 200/200 [00:01<00:00, 182.98it/s]
+Evaluating task: ETT - Abnormal
+Evaluating metric: AUPRC
+/sailhome/adgulati/miniconda3/envs/medaug-env/lib/python3.7/site-packages/sklearn/metrics/_ranking.py:677: RuntimeWarning: invalid value encountered in true_divide
+  recall = tps / tps[-1]
+Evaluating metric: AUROC
+Evaluating metric: log_loss
+Evaluating metric: accuracy
+Evaluating metric: precision
+/sailhome/adgulati/miniconda3/envs/medaug-env/lib/python3.7/site-packages/sklearn/metrics/_classification.py:1272: UndefinedMetricWarning: Precision is ill-defined and being set to 0.0 due to no predicted samples. Use `zero_division` parameter to control this behavior.
+  _warn_prf(average, modifier, msg_start, len(result))
+Evaluating metric: recall
+/sailhome/adgulati/miniconda3/envs/medaug-env/lib/python3.7/site-packages/sklearn/metrics/_classification.py:1272: UndefinedMetricWarning: Recall is ill-defined and being set to 0.0 due to no true samples. Use `zero_division` parameter to control this behavior.
+  _warn_prf(average, modifier, msg_start, len(result))
+Evaluating metric: PRC
+/sailhome/adgulati/miniconda3/envs/medaug-env/lib/python3.7/site-packages/sklearn/metrics/_ranking.py:677: RuntimeWarning: invalid value encountered in true_divide
+  recall = tps / tps[-1]
+Evaluating metric: ROC
+/sailhome/adgulati/miniconda3/envs/medaug-env/lib/python3.7/site-packages/sklearn/metrics/_ranking.py:808: UndefinedMetricWarning: No positive samples in y_true, true positive value should be meaningless
+  UndefinedMetricWarning)
+Evaluating task: ETT - Borderline
+Evaluating metric: AUPRC
+Evaluating metric: AUROC
+Evaluating metric: log_loss
+Evaluating metric: accuracy
+Evaluating metric: precision
+/sailhome/adgulati/miniconda3/envs/medaug-env/lib/python3.7/site-packages/sklearn/metrics/_classification.py:1272: UndefinedMetricWarning: Precision is ill-defined and being set to 0.0 due to no predicted samples. Use `zero_division` parameter to control this behavior.
+  _warn_prf(average, modifier, msg_start, len(result))
+Evaluating metric: recall
+Evaluating metric: PRC
+Evaluating metric: ROC
+Evaluating task: ETT - Normal
+Evaluating metric: AUPRC
+Evaluating metric: AUROC
+Evaluating metric: log_loss
+Evaluating metric: accuracy
+Evaluating metric: precision
+Evaluating metric: recall
+Evaluating metric: PRC
+Evaluating metric: ROC
+Evaluating task: NGT - Abnormal
+Evaluating metric: AUPRC
+Evaluating metric: AUROC
+Evaluating metric: log_loss
+Evaluating metric: accuracy
+Evaluating metric: precision
+/sailhome/adgulati/miniconda3/envs/medaug-env/lib/python3.7/site-packages/sklearn/metrics/_classification.py:1272: UndefinedMetricWarning: Precision is ill-defined and being set to 0.0 due to no predicted samples. Use `zero_division` parameter to control this behavior.
+  _warn_prf(average, modifier, msg_start, len(result))
+Evaluating metric: recall
+Evaluating metric: PRC
+Evaluating metric: ROC
+Evaluating task: NGT - Borderline
+Evaluating metric: AUPRC
+Evaluating metric: AUROC
+Evaluating metric: log_loss
+Evaluating metric: accuracy
+Evaluating metric: precision
+/sailhome/adgulati/miniconda3/envs/medaug-env/lib/python3.7/site-packages/sklearn/metrics/_classification.py:1272: UndefinedMetricWarning: Precision is ill-defined and being set to 0.0 due to no predicted samples. Use `zero_division` parameter to control this behavior.
+  _warn_prf(average, modifier, msg_start, len(result))
+Evaluating metric: recall
+Evaluating metric: PRC
+Evaluating metric: ROC
+Evaluating task: NGT - Incompletely Imaged
+Evaluating metric: AUPRC
+Evaluating metric: AUROC
+Evaluating metric: log_loss
+Evaluating metric: accuracy
+Evaluating metric: precision
+Evaluating metric: recall
+Evaluating metric: PRC
+Evaluating metric: ROC
+Evaluating task: NGT - Normal
+Evaluating metric: AUPRC
+Evaluating metric: AUROC
+Evaluating metric: log_loss
+Evaluating metric: accuracy
+Evaluating metric: precision
+Evaluating metric: recall
+Evaluating metric: PRC
+Evaluating metric: ROC
+Evaluating task: CVC - Abnormal
+Evaluating metric: AUPRC
+Evaluating metric: AUROC
+Evaluating metric: log_loss
+Evaluating metric: accuracy
+Evaluating metric: precision
+/sailhome/adgulati/miniconda3/envs/medaug-env/lib/python3.7/site-packages/sklearn/metrics/_classification.py:1272: UndefinedMetricWarning: Precision is ill-defined and being set to 0.0 due to no predicted samples. Use `zero_division` parameter to control this behavior.
+  _warn_prf(average, modifier, msg_start, len(result))
+Evaluating metric: recall
+Evaluating metric: PRC
+Evaluating metric: ROC
+Evaluating task: CVC - Borderline
+Evaluating metric: AUPRC
+Evaluating metric: AUROC
+Evaluating metric: log_loss
+Evaluating metric: accuracy
+Evaluating metric: precision
+/sailhome/adgulati/miniconda3/envs/medaug-env/lib/python3.7/site-packages/sklearn/metrics/_classification.py:1272: UndefinedMetricWarning: Precision is ill-defined and being set to 0.0 due to no predicted samples. Use `zero_division` parameter to control this behavior.
+  _warn_prf(average, modifier, msg_start, len(result))
+Evaluating metric: recall
+Evaluating metric: PRC
+Evaluating metric: ROC
+Evaluating task: CVC - Normal
+Evaluating metric: AUPRC
+Evaluating metric: AUROC
+Evaluating metric: log_loss
+Evaluating metric: accuracy
+Evaluating metric: precision
+Evaluating metric: recall
+Evaluating metric: PRC
+Evaluating metric: ROC
+Evaluating task: Swan Ganz Catheter Present
+Evaluating metric: AUPRC
+Evaluating metric: AUROC
+Evaluating metric: log_loss
+Evaluating metric: accuracy
+Evaluating metric: precision
+/sailhome/adgulati/miniconda3/envs/medaug-env/lib/python3.7/site-packages/sklearn/metrics/_classification.py:1272: UndefinedMetricWarning: Precision is ill-defined and being set to 0.0 due to no predicted samples. Use `zero_division` parameter to control this behavior.
+  _warn_prf(average, modifier, msg_start, len(result))
+Evaluating metric: recall
+Evaluating metric: PRC
+Evaluating metric: ROC
+[ETT - Abnormal:AUPRC:	nan]
+[ETT - Abnormal:AUROC:	nan]
+[ETT - Abnormal:log_loss:	nan]
+[ETT - Abnormal:accuracy@thresh=0.5:	1.0]
+[ETT - Abnormal:precision@thresh=0.5:	0.0]
+[ETT - Abnormal:recall@thresh=0.5:	0.0]
+[ETT - Borderline:AUPRC:	0.2671544843898575]
+[ETT - Borderline:AUROC:	0.854922279792746]
+[ETT - Borderline:log_loss:	0.12119362942728912]
+[ETT - Borderline:accuracy@thresh=0.5:	0.965]
+[ETT - Borderline:precision@thresh=0.5:	0.0]
+[ETT - Borderline:recall@thresh=0.5:	0.0]
+[ETT - Normal:AUPRC:	0.6644441440846713]
+[ETT - Normal:AUROC:	0.936392629340893]
+[ETT - Normal:log_loss:	0.25546486116363665]
+[ETT - Normal:accuracy@thresh=0.5:	0.875]
+[ETT - Normal:precision@thresh=0.5:	0.6216216216216216]
+[ETT - Normal:recall@thresh=0.5:	0.6764705882352942]
+[NGT - Abnormal:AUPRC:	0.09090909090909091]
+[NGT - Abnormal:AUROC:	0.949748743718593]
+[NGT - Abnormal:log_loss:	0.027827679658075796]
+[NGT - Abnormal:accuracy@thresh=0.5:	0.995]
+[NGT - Abnormal:precision@thresh=0.5:	0.0]
+[NGT - Abnormal:recall@thresh=0.5:	0.0]
+[NGT - Borderline:AUPRC:	0.07459213298524633]
+[NGT - Borderline:AUROC:	0.7251282051282051]
+[NGT - Borderline:log_loss:	0.11235780856106431]
+[NGT - Borderline:accuracy@thresh=0.5:	0.975]
+[NGT - Borderline:precision@thresh=0.5:	0.0]
+[NGT - Borderline:recall@thresh=0.5:	0.0]
+[NGT - Incompletely Imaged:AUPRC:	0.3765566363256621]
+[NGT - Incompletely Imaged:AUROC:	0.8967503085150145]
+[NGT - Incompletely Imaged:log_loss:	0.16740907189436258]
+[NGT - Incompletely Imaged:accuracy@thresh=0.5:	0.94]
+[NGT - Incompletely Imaged:precision@thresh=0.5:	0.6666666666666666]
+[NGT - Incompletely Imaged:recall@thresh=0.5:	0.15384615384615385]
+[NGT - Normal:AUPRC:	0.4914071075933232]
+[NGT - Normal:AUROC:	0.8763428571428571]
+[NGT - Normal:log_loss:	0.26484034506429455]
+[NGT - Normal:accuracy@thresh=0.5:	0.885]
+[NGT - Normal:precision@thresh=0.5:	0.6]
+[NGT - Normal:recall@thresh=0.5:	0.24]
+[CVC - Abnormal:AUPRC:	0.09654953696150934]
+[CVC - Abnormal:AUROC:	0.4460599011340506]
+[CVC - Abnormal:log_loss:	0.3298354207724333]
+[CVC - Abnormal:accuracy@thresh=0.5:	0.905]
+[CVC - Abnormal:precision@thresh=0.5:	0.0]
+[CVC - Abnormal:recall@thresh=0.5:	0.0]
+[CVC - Borderline:AUPRC:	0.3472048401309174]
+[CVC - Borderline:AUROC:	0.641496314837992]
+[CVC - Borderline:log_loss:	0.5307343281432986]
+[CVC - Borderline:accuracy@thresh=0.5:	0.765]
+[CVC - Borderline:precision@thresh=0.5:	0.0]
+[CVC - Borderline:recall@thresh=0.5:	0.0]
+[CVC - Normal:AUPRC:	0.7747574544391369]
+[CVC - Normal:AUROC:	0.5737389295340778]
+[CVC - Normal:log_loss:	0.5709427719935775]
+[CVC - Normal:accuracy@thresh=0.5:	0.735]
+[CVC - Normal:precision@thresh=0.5:	0.735]
+[CVC - Normal:recall@thresh=0.5:	1.0]
+[Swan Ganz Catheter Present:AUPRC:	0.34545454545454546]
+[Swan Ganz Catheter Present:AUROC:	0.9610829103214891]
+[Swan Ganz Catheter Present:log_loss:	0.05623618330922909]
+[Swan Ganz Catheter Present:accuracy@thresh=0.5:	0.985]
+[Swan Ganz Catheter Present:precision@thresh=0.5:	0.0]
+[Swan Ganz Catheter Present:recall@thresh=0.5:	0.0]
+[ETT - Abnormal:AUPRC: nan]
+WARNING:root:NaN or Inf found in input tensor.
+[ETT - Abnormal:AUROC: nan]
+WARNING:root:NaN or Inf found in input tensor.
+[ETT - Abnormal:log_loss: nan]
+WARNING:root:NaN or Inf found in input tensor.
+[ETT - Abnormal:accuracy@thresh=0.5: 1]
+[ETT - Abnormal:precision@thresh=0.5: 0]
+[ETT - Abnormal:recall@thresh=0.5: 0]
+[ETT - Borderline:AUPRC: 0.267]
+[ETT - Borderline:AUROC: 0.855]
+[ETT - Borderline:log_loss: 0.121]
+[ETT - Borderline:accuracy@thresh=0.5: 0.965]
+[ETT - Borderline:precision@thresh=0.5: 0]
+[ETT - Borderline:recall@thresh=0.5: 0]
+[ETT - Normal:AUPRC: 0.664]
+[ETT - Normal:AUROC: 0.936]
+[ETT - Normal:log_loss: 0.255]
+[ETT - Normal:accuracy@thresh=0.5: 0.875]
+[ETT - Normal:precision@thresh=0.5: 0.622]
+[ETT - Normal:recall@thresh=0.5: 0.676]
+[NGT - Abnormal:AUPRC: 0.0909]
+[NGT - Abnormal:AUROC: 0.95]
+[NGT - Abnormal:log_loss: 0.0278]
+[NGT - Abnormal:accuracy@thresh=0.5: 0.995]
+[NGT - Abnormal:precision@thresh=0.5: 0]
+[NGT - Abnormal:recall@thresh=0.5: 0]
+[NGT - Borderline:AUPRC: 0.0746]
+[NGT - Borderline:AUROC: 0.725]
+[NGT - Borderline:log_loss: 0.112]
+[NGT - Borderline:accuracy@thresh=0.5: 0.975]
+[NGT - Borderline:precision@thresh=0.5: 0]
+[NGT - Borderline:recall@thresh=0.5: 0]
+[NGT - Incompletely Imaged:AUPRC: 0.377]
+[NGT - Incompletely Imaged:AUROC: 0.897]
+[NGT - Incompletely Imaged:log_loss: 0.167]
+[NGT - Incompletely Imaged:accuracy@thresh=0.5: 0.94]
+[NGT - Incompletely Imaged:precision@thresh=0.5: 0.667]
+[NGT - Incompletely Imaged:recall@thresh=0.5: 0.154]
+[NGT - Normal:AUPRC: 0.491]
+[NGT - Normal:AUROC: 0.876]
+[NGT - Normal:log_loss: 0.265]
+[NGT - Normal:accuracy@thresh=0.5: 0.885]
+[NGT - Normal:precision@thresh=0.5: 0.6]
+[NGT - Normal:recall@thresh=0.5: 0.24]
+[CVC - Abnormal:AUPRC: 0.0965]
+[CVC - Abnormal:AUROC: 0.446]
+[CVC - Abnormal:log_loss: 0.33]
+[CVC - Abnormal:accuracy@thresh=0.5: 0.905]
+[CVC - Abnormal:precision@thresh=0.5: 0]
+[CVC - Abnormal:recall@thresh=0.5: 0]
+[CVC - Borderline:AUPRC: 0.347]
+[CVC - Borderline:AUROC: 0.641]
+[CVC - Borderline:log_loss: 0.531]
+[CVC - Borderline:accuracy@thresh=0.5: 0.765]
+[CVC - Borderline:precision@thresh=0.5: 0]
+[CVC - Borderline:recall@thresh=0.5: 0]
+[CVC - Normal:AUPRC: 0.775]
+[CVC - Normal:AUROC: 0.574]
+[CVC - Normal:log_loss: 0.571]
+[CVC - Normal:accuracy@thresh=0.5: 0.735]
+[CVC - Normal:precision@thresh=0.5: 0.735]
+[CVC - Normal:recall@thresh=0.5: 1]
+[Swan Ganz Catheter Present:AUPRC: 0.345]
+[Swan Ganz Catheter Present:AUROC: 0.961]
+[Swan Ganz Catheter Present:log_loss: 0.0562]
+[Swan Ganz Catheter Present:accuracy@thresh=0.5: 0.985]
+[Swan Ganz Catheter Present:precision@thresh=0.5: 0]
+[Swan Ganz Catheter Present:recall@thresh=0.5: 0]
+[start of epoch 3]
+[epoch: 3, iter: 0 / 23874, time: 0.00, loss: 0.243]
+[epoch: 3, iter: 1024 / 23874, time: 0.00, loss: 0.243]
+[epoch: 3, iter: 2048 / 23874, time: 0.00, loss: 0.242]
+[epoch: 3, iter: 3072 / 23874, time: 0.00, loss: 0.244]
+[epoch: 3, iter: 4096 / 23874, time: 0.00, loss: 0.244]
+[epoch: 3, iter: 5120 / 23874, time: 0.00, loss: 0.25]
+[epoch: 3, iter: 6144 / 23874, time: 0.00, loss: 0.245]
+[epoch: 3, iter: 7168 / 23874, time: 0.00, loss: 0.249]
+[epoch: 3, iter: 8192 / 23874, time: 0.00, loss: 0.24]
+[epoch: 3, iter: 9216 / 23874, time: 0.00, loss: 0.249]
+[epoch: 3, iter: 10240 / 23874, time: 0.00, loss: 0.245]
+[epoch: 3, iter: 11264 / 23874, time: 0.00, loss: 0.239]
+[epoch: 3, iter: 12288 / 23874, time: 0.00, loss: 0.242]
+[epoch: 3, iter: 13312 / 23874, time: 0.00, loss: 0.233]
+[epoch: 3, iter: 14336 / 23874, time: 0.00, loss: 0.257]
+[epoch: 3, iter: 15360 / 23874, time: 0.00, loss: 0.244]
+[epoch: 3, iter: 16384 / 23874, time: 0.00, loss: 0.241]
+[epoch: 3, iter: 17408 / 23874, time: 0.00, loss: 0.252]
+  0%|          | 0/200 [00:00<?, ?it/s] 16%|█▌        | 32/200 [00:00<00:03, 48.01it/s] 48%|████▊     | 96/200 [00:00<00:01, 65.41it/s] 80%|████████  | 160/200 [00:00<00:00, 87.34it/s]100%|██████████| 200/200 [00:01<00:00, 114.00it/s]100%|██████████| 200/200 [00:01<00:00, 174.21it/s]
+Evaluating task: ETT - Abnormal
+Evaluating metric: AUPRC
+/sailhome/adgulati/miniconda3/envs/medaug-env/lib/python3.7/site-packages/sklearn/metrics/_ranking.py:677: RuntimeWarning: invalid value encountered in true_divide
+  recall = tps / tps[-1]
+Evaluating metric: AUROC
+Evaluating metric: log_loss
+Evaluating metric: accuracy
+Evaluating metric: precision
+/sailhome/adgulati/miniconda3/envs/medaug-env/lib/python3.7/site-packages/sklearn/metrics/_classification.py:1272: UndefinedMetricWarning: Precision is ill-defined and being set to 0.0 due to no predicted samples. Use `zero_division` parameter to control this behavior.
+  _warn_prf(average, modifier, msg_start, len(result))
+Evaluating metric: recall
+/sailhome/adgulati/miniconda3/envs/medaug-env/lib/python3.7/site-packages/sklearn/metrics/_classification.py:1272: UndefinedMetricWarning: Recall is ill-defined and being set to 0.0 due to no true samples. Use `zero_division` parameter to control this behavior.
+  _warn_prf(average, modifier, msg_start, len(result))
+Evaluating metric: PRC
+/sailhome/adgulati/miniconda3/envs/medaug-env/lib/python3.7/site-packages/sklearn/metrics/_ranking.py:677: RuntimeWarning: invalid value encountered in true_divide
+  recall = tps / tps[-1]
+Evaluating metric: ROC
+/sailhome/adgulati/miniconda3/envs/medaug-env/lib/python3.7/site-packages/sklearn/metrics/_ranking.py:808: UndefinedMetricWarning: No positive samples in y_true, true positive value should be meaningless
+  UndefinedMetricWarning)
+Evaluating task: ETT - Borderline
+Evaluating metric: AUPRC
+Evaluating metric: AUROC
+Evaluating metric: log_loss
+Evaluating metric: accuracy
+Evaluating metric: precision
+/sailhome/adgulati/miniconda3/envs/medaug-env/lib/python3.7/site-packages/sklearn/metrics/_classification.py:1272: UndefinedMetricWarning: Precision is ill-defined and being set to 0.0 due to no predicted samples. Use `zero_division` parameter to control this behavior.
+  _warn_prf(average, modifier, msg_start, len(result))
+Evaluating metric: recall
+Evaluating metric: PRC
+Evaluating metric: ROC
+Evaluating task: ETT - Normal
+Evaluating metric: AUPRC
+Evaluating metric: AUROC
+Evaluating metric: log_loss
+Evaluating metric: accuracy
+Evaluating metric: precision
+Evaluating metric: recall
+Evaluating metric: PRC
+Evaluating metric: ROC
+Evaluating task: NGT - Abnormal
+Evaluating metric: AUPRC
+Evaluating metric: AUROC
+Evaluating metric: log_loss
+Evaluating metric: accuracy
+Evaluating metric: precision
+/sailhome/adgulati/miniconda3/envs/medaug-env/lib/python3.7/site-packages/sklearn/metrics/_classification.py:1272: UndefinedMetricWarning: Precision is ill-defined and being set to 0.0 due to no predicted samples. Use `zero_division` parameter to control this behavior.
+  _warn_prf(average, modifier, msg_start, len(result))
+Evaluating metric: recall
+Evaluating metric: PRC
+Evaluating metric: ROC
+Evaluating task: NGT - Borderline
+Evaluating metric: AUPRC
+Evaluating metric: AUROC
+Evaluating metric: log_loss
+Evaluating metric: accuracy
+Evaluating metric: precision
+/sailhome/adgulati/miniconda3/envs/medaug-env/lib/python3.7/site-packages/sklearn/metrics/_classification.py:1272: UndefinedMetricWarning: Precision is ill-defined and being set to 0.0 due to no predicted samples. Use `zero_division` parameter to control this behavior.
+  _warn_prf(average, modifier, msg_start, len(result))
+Evaluating metric: recall
+Evaluating metric: PRC
+Evaluating metric: ROC
+Evaluating task: NGT - Incompletely Imaged
+Evaluating metric: AUPRC
+Evaluating metric: AUROC
+Evaluating metric: log_loss
+Evaluating metric: accuracy
+Evaluating metric: precision
+Evaluating metric: recall
+Evaluating metric: PRC
+Evaluating metric: ROC
+Evaluating task: NGT - Normal
+Evaluating metric: AUPRC
+Evaluating metric: AUROC
+Evaluating metric: log_loss
+Evaluating metric: accuracy
+Evaluating metric: precision
+Evaluating metric: recall
+Evaluating metric: PRC
+Evaluating metric: ROC
+Evaluating task: CVC - Abnormal
+Evaluating metric: AUPRC
+Evaluating metric: AUROC
+Evaluating metric: log_loss
+Evaluating metric: accuracy
+Evaluating metric: precision
+/sailhome/adgulati/miniconda3/envs/medaug-env/lib/python3.7/site-packages/sklearn/metrics/_classification.py:1272: UndefinedMetricWarning: Precision is ill-defined and being set to 0.0 due to no predicted samples. Use `zero_division` parameter to control this behavior.
+  _warn_prf(average, modifier, msg_start, len(result))
+Evaluating metric: recall
+Evaluating metric: PRC
+Evaluating metric: ROC
+Evaluating task: CVC - Borderline
+Evaluating metric: AUPRC
+Evaluating metric: AUROC
+Evaluating metric: log_loss
+Evaluating metric: accuracy
+Evaluating metric: precision
+Evaluating metric: recall
+Evaluating metric: PRC
+Evaluating metric: ROC
+Evaluating task: CVC - Normal
+Evaluating metric: AUPRC
+Evaluating metric: AUROC
+Evaluating metric: log_loss
+Evaluating metric: accuracy
+Evaluating metric: precision
+Evaluating metric: recall
+Evaluating metric: PRC
+Evaluating metric: ROC
+Evaluating task: Swan Ganz Catheter Present
+Evaluating metric: AUPRC
+Evaluating metric: AUROC
+Evaluating metric: log_loss
+Evaluating metric: accuracy
+Evaluating metric: precision
+/sailhome/adgulati/miniconda3/envs/medaug-env/lib/python3.7/site-packages/sklearn/metrics/_classification.py:1272: UndefinedMetricWarning: Precision is ill-defined and being set to 0.0 due to no predicted samples. Use `zero_division` parameter to control this behavior.
+  _warn_prf(average, modifier, msg_start, len(result))
+Evaluating metric: recall
+Evaluating metric: PRC
+Evaluating metric: ROC
+[ETT - Abnormal:AUPRC:	nan]
+[ETT - Abnormal:AUROC:	nan]
+[ETT - Abnormal:log_loss:	nan]
+[ETT - Abnormal:accuracy@thresh=0.5:	1.0]
+[ETT - Abnormal:precision@thresh=0.5:	0.0]
+[ETT - Abnormal:recall@thresh=0.5:	0.0]
+[ETT - Borderline:AUPRC:	0.18287336792640552]
+[ETT - Borderline:AUROC:	0.8697261287934863]
+[ETT - Borderline:log_loss:	0.11930430369073292]
+[ETT - Borderline:accuracy@thresh=0.5:	0.965]
+[ETT - Borderline:precision@thresh=0.5:	0.0]
+[ETT - Borderline:recall@thresh=0.5:	0.0]
+[ETT - Normal:AUPRC:	0.66855631018918]
+[ETT - Normal:AUROC:	0.9379872430900071]
+[ETT - Normal:log_loss:	0.2628808103327174]
+[ETT - Normal:accuracy@thresh=0.5:	0.885]
+[ETT - Normal:precision@thresh=0.5:	0.627906976744186]
+[ETT - Normal:recall@thresh=0.5:	0.7941176470588235]
+[NGT - Abnormal:AUPRC:	0.09090909090909091]
+[NGT - Abnormal:AUROC:	0.949748743718593]
+[NGT - Abnormal:log_loss:	0.02600982892123284]
+[NGT - Abnormal:accuracy@thresh=0.5:	0.995]
+[NGT - Abnormal:precision@thresh=0.5:	0.0]
+[NGT - Abnormal:recall@thresh=0.5:	0.0]
+[NGT - Borderline:AUPRC:	0.10149675581043449]
+[NGT - Borderline:AUROC:	0.796923076923077]
+[NGT - Borderline:log_loss:	0.10378751458367333]
+[NGT - Borderline:accuracy@thresh=0.5:	0.975]
+[NGT - Borderline:precision@thresh=0.5:	0.0]
+[NGT - Borderline:recall@thresh=0.5:	0.0]
+[NGT - Incompletely Imaged:AUPRC:	0.38938656300745617]
+[NGT - Incompletely Imaged:AUROC:	0.8988070752776636]
+[NGT - Incompletely Imaged:log_loss:	0.16861110578203806]
+[NGT - Incompletely Imaged:accuracy@thresh=0.5:	0.935]
+[NGT - Incompletely Imaged:precision@thresh=0.5:	0.5]
+[NGT - Incompletely Imaged:recall@thresh=0.5:	0.15384615384615385]
+[NGT - Normal:AUPRC:	0.46599322276944916]
+[NGT - Normal:AUROC:	0.8770285714285715]
+[NGT - Normal:log_loss:	0.2711001814808697]
+[NGT - Normal:accuracy@thresh=0.5:	0.86]
+[NGT - Normal:precision@thresh=0.5:	0.43478260869565216]
+[NGT - Normal:recall@thresh=0.5:	0.4]
+[CVC - Abnormal:AUPRC:	0.09926606026228013]
+[CVC - Abnormal:AUROC:	0.46525152660657165]
+[CVC - Abnormal:log_loss:	0.32708922631107273]
+[CVC - Abnormal:accuracy@thresh=0.5:	0.905]
+[CVC - Abnormal:precision@thresh=0.5:	0.0]
+[CVC - Abnormal:recall@thresh=0.5:	0.0]
+[CVC - Borderline:AUPRC:	0.33154451333700746]
+[CVC - Borderline:AUROC:	0.6161869002920317]
+[CVC - Borderline:log_loss:	0.5326115601882339]
+[CVC - Borderline:accuracy@thresh=0.5:	0.76]
+[CVC - Borderline:precision@thresh=0.5:	0.0]
+[CVC - Borderline:recall@thresh=0.5:	0.0]
+[CVC - Normal:AUPRC:	0.7737804290037054]
+[CVC - Normal:AUROC:	0.5546142985496085]
+[CVC - Normal:log_loss:	0.5744996758177876]
+[CVC - Normal:accuracy@thresh=0.5:	0.735]
+[CVC - Normal:precision@thresh=0.5:	0.735]
+[CVC - Normal:recall@thresh=0.5:	1.0]
+[Swan Ganz Catheter Present:AUPRC:	0.5142857142857142]
+[Swan Ganz Catheter Present:AUROC:	0.964467005076142]
+[Swan Ganz Catheter Present:log_loss:	0.054448546078347135]
+[Swan Ganz Catheter Present:accuracy@thresh=0.5:	0.985]
+[Swan Ganz Catheter Present:precision@thresh=0.5:	0.0]
+[Swan Ganz Catheter Present:recall@thresh=0.5:	0.0]
+[ETT - Abnormal:AUPRC: nan]
+WARNING:root:NaN or Inf found in input tensor.
+[ETT - Abnormal:AUROC: nan]
+WARNING:root:NaN or Inf found in input tensor.
+[ETT - Abnormal:log_loss: nan]
+WARNING:root:NaN or Inf found in input tensor.
+[ETT - Abnormal:accuracy@thresh=0.5: 1]
+[ETT - Abnormal:precision@thresh=0.5: 0]
+[ETT - Abnormal:recall@thresh=0.5: 0]
+[ETT - Borderline:AUPRC: 0.183]
+[ETT - Borderline:AUROC: 0.87]
+[ETT - Borderline:log_loss: 0.119]
+[ETT - Borderline:accuracy@thresh=0.5: 0.965]
+[ETT - Borderline:precision@thresh=0.5: 0]
+[ETT - Borderline:recall@thresh=0.5: 0]
+[ETT - Normal:AUPRC: 0.669]
+[ETT - Normal:AUROC: 0.938]
+[ETT - Normal:log_loss: 0.263]
+[ETT - Normal:accuracy@thresh=0.5: 0.885]
+[ETT - Normal:precision@thresh=0.5: 0.628]
+[ETT - Normal:recall@thresh=0.5: 0.794]
+[NGT - Abnormal:AUPRC: 0.0909]
+[NGT - Abnormal:AUROC: 0.95]
+[NGT - Abnormal:log_loss: 0.026]
+[NGT - Abnormal:accuracy@thresh=0.5: 0.995]
+[NGT - Abnormal:precision@thresh=0.5: 0]
+[NGT - Abnormal:recall@thresh=0.5: 0]
+[NGT - Borderline:AUPRC: 0.101]
+[NGT - Borderline:AUROC: 0.797]
+[NGT - Borderline:log_loss: 0.104]
+[NGT - Borderline:accuracy@thresh=0.5: 0.975]
+[NGT - Borderline:precision@thresh=0.5: 0]
+[NGT - Borderline:recall@thresh=0.5: 0]
+[NGT - Incompletely Imaged:AUPRC: 0.389]
+[NGT - Incompletely Imaged:AUROC: 0.899]
+[NGT - Incompletely Imaged:log_loss: 0.169]
+[NGT - Incompletely Imaged:accuracy@thresh=0.5: 0.935]
+[NGT - Incompletely Imaged:precision@thresh=0.5: 0.5]
+[NGT - Incompletely Imaged:recall@thresh=0.5: 0.154]
+[NGT - Normal:AUPRC: 0.466]
+[NGT - Normal:AUROC: 0.877]
+[NGT - Normal:log_loss: 0.271]
+[NGT - Normal:accuracy@thresh=0.5: 0.86]
+[NGT - Normal:precision@thresh=0.5: 0.435]
+[NGT - Normal:recall@thresh=0.5: 0.4]
+[CVC - Abnormal:AUPRC: 0.0993]
+[CVC - Abnormal:AUROC: 0.465]
+[CVC - Abnormal:log_loss: 0.327]
+[CVC - Abnormal:accuracy@thresh=0.5: 0.905]
+[CVC - Abnormal:precision@thresh=0.5: 0]
+[CVC - Abnormal:recall@thresh=0.5: 0]
+[CVC - Borderline:AUPRC: 0.332]
+[CVC - Borderline:AUROC: 0.616]
+[CVC - Borderline:log_loss: 0.533]
+[CVC - Borderline:accuracy@thresh=0.5: 0.76]
+[CVC - Borderline:precision@thresh=0.5: 0]
+[CVC - Borderline:recall@thresh=0.5: 0]
+[CVC - Normal:AUPRC: 0.774]
+[CVC - Normal:AUROC: 0.555]
+[CVC - Normal:log_loss: 0.574]
+[CVC - Normal:accuracy@thresh=0.5: 0.735]
+[CVC - Normal:precision@thresh=0.5: 0.735]
+[CVC - Normal:recall@thresh=0.5: 1]
+[Swan Ganz Catheter Present:AUPRC: 0.514]
+[Swan Ganz Catheter Present:AUROC: 0.964]
+[Swan Ganz Catheter Present:log_loss: 0.0544]
+[Swan Ganz Catheter Present:accuracy@thresh=0.5: 0.985]
+[Swan Ganz Catheter Present:precision@thresh=0.5: 0]
+[Swan Ganz Catheter Present:recall@thresh=0.5: 0]
+Save global step: 65536
+Saver -- save checkpoint: /deep/group/cxr-transfer/SSL-methods/MedAug/experiments/ranzcr-SSL/iter_65536.pth.tar
+Path /deep/group/cxr-transfer/SSL-methods/MedAug/experiments/ranzcr-SSL already exists
+[epoch: 3, iter: 18432 / 23874, time: 0.00, loss: 0.241]
+[epoch: 3, iter: 19456 / 23874, time: 0.00, loss: 0.241]
+[epoch: 3, iter: 20480 / 23874, time: 0.00, loss: 0.258]
+[epoch: 3, iter: 21504 / 23874, time: 0.00, loss: 0.247]
+[epoch: 3, iter: 22528 / 23874, time: 0.00, loss: 0.245]
+[epoch: 3, iter: 23552 / 23874, time: 0.00, loss: 0.243]
+  0%|          | 0/200 [00:00<?, ?it/s] 16%|█▌        | 32/200 [00:00<00:03, 45.27it/s] 48%|████▊     | 96/200 [00:00<00:01, 62.04it/s] 80%|████████  | 160/200 [00:00<00:00, 83.62it/s]100%|██████████| 200/200 [00:01<00:00, 172.26it/s]
+Evaluating task: ETT - Abnormal
+Evaluating metric: AUPRC
+/sailhome/adgulati/miniconda3/envs/medaug-env/lib/python3.7/site-packages/sklearn/metrics/_ranking.py:677: RuntimeWarning: invalid value encountered in true_divide
+  recall = tps / tps[-1]
+Evaluating metric: AUROC
+Evaluating metric: log_loss
+Evaluating metric: accuracy
+Evaluating metric: precision
+/sailhome/adgulati/miniconda3/envs/medaug-env/lib/python3.7/site-packages/sklearn/metrics/_classification.py:1272: UndefinedMetricWarning: Precision is ill-defined and being set to 0.0 due to no predicted samples. Use `zero_division` parameter to control this behavior.
+  _warn_prf(average, modifier, msg_start, len(result))
+Evaluating metric: recall
+/sailhome/adgulati/miniconda3/envs/medaug-env/lib/python3.7/site-packages/sklearn/metrics/_classification.py:1272: UndefinedMetricWarning: Recall is ill-defined and being set to 0.0 due to no true samples. Use `zero_division` parameter to control this behavior.
+  _warn_prf(average, modifier, msg_start, len(result))
+Evaluating metric: PRC
+/sailhome/adgulati/miniconda3/envs/medaug-env/lib/python3.7/site-packages/sklearn/metrics/_ranking.py:677: RuntimeWarning: invalid value encountered in true_divide
+  recall = tps / tps[-1]
+Evaluating metric: ROC
+/sailhome/adgulati/miniconda3/envs/medaug-env/lib/python3.7/site-packages/sklearn/metrics/_ranking.py:808: UndefinedMetricWarning: No positive samples in y_true, true positive value should be meaningless
+  UndefinedMetricWarning)
+Evaluating task: ETT - Borderline
+Evaluating metric: AUPRC
+Evaluating metric: AUROC
+Evaluating metric: log_loss
+Evaluating metric: accuracy
+Evaluating metric: precision
+/sailhome/adgulati/miniconda3/envs/medaug-env/lib/python3.7/site-packages/sklearn/metrics/_classification.py:1272: UndefinedMetricWarning: Precision is ill-defined and being set to 0.0 due to no predicted samples. Use `zero_division` parameter to control this behavior.
+  _warn_prf(average, modifier, msg_start, len(result))
+Evaluating metric: recall
+Evaluating metric: PRC
+Evaluating metric: ROC
+Evaluating task: ETT - Normal
+Evaluating metric: AUPRC
+Evaluating metric: AUROC
+Evaluating metric: log_loss
+Evaluating metric: accuracy
+Evaluating metric: precision
+Evaluating metric: recall
+Evaluating metric: PRC
+Evaluating metric: ROC
+Evaluating task: NGT - Abnormal
+Evaluating metric: AUPRC
+Evaluating metric: AUROC
+Evaluating metric: log_loss
+Evaluating metric: accuracy
+Evaluating metric: precision
+/sailhome/adgulati/miniconda3/envs/medaug-env/lib/python3.7/site-packages/sklearn/metrics/_classification.py:1272: UndefinedMetricWarning: Precision is ill-defined and being set to 0.0 due to no predicted samples. Use `zero_division` parameter to control this behavior.
+  _warn_prf(average, modifier, msg_start, len(result))
+Evaluating metric: recall
+Evaluating metric: PRC
+Evaluating metric: ROC
+Evaluating task: NGT - Borderline
+Evaluating metric: AUPRC
+Evaluating metric: AUROC
+Evaluating metric: log_loss
+Evaluating metric: accuracy
+Evaluating metric: precision
+/sailhome/adgulati/miniconda3/envs/medaug-env/lib/python3.7/site-packages/sklearn/metrics/_classification.py:1272: UndefinedMetricWarning: Precision is ill-defined and being set to 0.0 due to no predicted samples. Use `zero_division` parameter to control this behavior.
+  _warn_prf(average, modifier, msg_start, len(result))
+Evaluating metric: recall
+Evaluating metric: PRC
+Evaluating metric: ROC
+Evaluating task: NGT - Incompletely Imaged
+Evaluating metric: AUPRC
+Evaluating metric: AUROC
+Evaluating metric: log_loss
+Evaluating metric: accuracy
+Evaluating metric: precision
+Evaluating metric: recall
+Evaluating metric: PRC
+Evaluating metric: ROC
+Evaluating task: NGT - Normal
+Evaluating metric: AUPRC
+Evaluating metric: AUROC
+Evaluating metric: log_loss
+Evaluating metric: accuracy
+Evaluating metric: precision
+Evaluating metric: recall
+Evaluating metric: PRC
+Evaluating metric: ROC
+Evaluating task: CVC - Abnormal
+Evaluating metric: AUPRC
+Evaluating metric: AUROC
+Evaluating metric: log_loss
+Evaluating metric: accuracy
+Evaluating metric: precision
+/sailhome/adgulati/miniconda3/envs/medaug-env/lib/python3.7/site-packages/sklearn/metrics/_classification.py:1272: UndefinedMetricWarning: Precision is ill-defined and being set to 0.0 due to no predicted samples. Use `zero_division` parameter to control this behavior.
+  _warn_prf(average, modifier, msg_start, len(result))
+Evaluating metric: recall
+Evaluating metric: PRC
+Evaluating metric: ROC
+Evaluating task: CVC - Borderline
+Evaluating metric: AUPRC
+Evaluating metric: AUROC
+Evaluating metric: log_loss
+Evaluating metric: accuracy
+Evaluating metric: precision
+Evaluating metric: recall
+Evaluating metric: PRC
+Evaluating metric: ROC
+Evaluating task: CVC - Normal
+Evaluating metric: AUPRC
+Evaluating metric: AUROC
+Evaluating metric: log_loss
+Evaluating metric: accuracy
+Evaluating metric: precision
+Evaluating metric: recall
+Evaluating metric: PRC
+Evaluating metric: ROC
+Evaluating task: Swan Ganz Catheter Present
+Evaluating metric: AUPRC
+Evaluating metric: AUROC
+Evaluating metric: log_loss
+Evaluating metric: accuracy
+Evaluating metric: precision
+/sailhome/adgulati/miniconda3/envs/medaug-env/lib/python3.7/site-packages/sklearn/metrics/_classification.py:1272: UndefinedMetricWarning: Precision is ill-defined and being set to 0.0 due to no predicted samples. Use `zero_division` parameter to control this behavior.
+  _warn_prf(average, modifier, msg_start, len(result))
+Evaluating metric: recall
+Evaluating metric: PRC
+Evaluating metric: ROC
+[ETT - Abnormal:AUPRC:	nan]
+[ETT - Abnormal:AUROC:	nan]
+[ETT - Abnormal:log_loss:	nan]
+[ETT - Abnormal:accuracy@thresh=0.5:	1.0]
+[ETT - Abnormal:precision@thresh=0.5:	0.0]
+[ETT - Abnormal:recall@thresh=0.5:	0.0]
+[ETT - Borderline:AUPRC:	0.19521957825134473]
+[ETT - Borderline:AUROC:	0.8652849740932642]
+[ETT - Borderline:log_loss:	0.12055994926427957]
+[ETT - Borderline:accuracy@thresh=0.5:	0.965]
+[ETT - Borderline:precision@thresh=0.5:	0.0]
+[ETT - Borderline:recall@thresh=0.5:	0.0]
+[ETT - Normal:AUPRC:	0.6723532431478411]
+[ETT - Normal:AUROC:	0.937987243090007]
+[ETT - Normal:log_loss:	0.24871523245121352]
+[ETT - Normal:accuracy@thresh=0.5:	0.89]
+[ETT - Normal:precision@thresh=0.5:	0.6764705882352942]
+[ETT - Normal:recall@thresh=0.5:	0.6764705882352942]
+[NGT - Abnormal:AUPRC:	0.09090909090909091]
+[NGT - Abnormal:AUROC:	0.949748743718593]
+[NGT - Abnormal:log_loss:	0.026779447425651595]
+[NGT - Abnormal:accuracy@thresh=0.5:	0.995]
+[NGT - Abnormal:precision@thresh=0.5:	0.0]
+[NGT - Abnormal:recall@thresh=0.5:	0.0]
+[NGT - Borderline:AUPRC:	0.112186555582782]
+[NGT - Borderline:AUROC:	0.8123076923076924]
+[NGT - Borderline:log_loss:	0.10300702445965726]
+[NGT - Borderline:accuracy@thresh=0.5:	0.975]
+[NGT - Borderline:precision@thresh=0.5:	0.0]
+[NGT - Borderline:recall@thresh=0.5:	0.0]
+[NGT - Incompletely Imaged:AUPRC:	0.39466565821910127]
+[NGT - Incompletely Imaged:AUROC:	0.8967503085150144]
+[NGT - Incompletely Imaged:log_loss:	0.16489522650867003]
+[NGT - Incompletely Imaged:accuracy@thresh=0.5:	0.935]
+[NGT - Incompletely Imaged:precision@thresh=0.5:	0.5]
+[NGT - Incompletely Imaged:recall@thresh=0.5:	0.07692307692307693]
+[NGT - Normal:AUPRC:	0.47292299943605637]
+[NGT - Normal:AUROC:	0.8793142857142857]
+[NGT - Normal:log_loss:	0.263973013087525]
+[NGT - Normal:accuracy@thresh=0.5:	0.885]
+[NGT - Normal:precision@thresh=0.5:	0.5625]
+[NGT - Normal:recall@thresh=0.5:	0.36]
+[CVC - Abnormal:AUPRC:	0.10774414359058473]
+[CVC - Abnormal:AUROC:	0.48473393428322187]
+[CVC - Abnormal:log_loss:	0.3241002137213945]
+[CVC - Abnormal:accuracy@thresh=0.5:	0.905]
+[CVC - Abnormal:precision@thresh=0.5:	0.0]
+[CVC - Abnormal:recall@thresh=0.5:	0.0]
+[CVC - Borderline:AUPRC:	0.3376095168747746]
+[CVC - Borderline:AUROC:	0.6203587818105966]
+[CVC - Borderline:log_loss:	0.5357791417464614]
+[CVC - Borderline:accuracy@thresh=0.5:	0.765]
+[CVC - Borderline:precision@thresh=0.5:	0.5]
+[CVC - Borderline:recall@thresh=0.5:	0.02127659574468085]
+[CVC - Normal:AUPRC:	0.7677839581861086]
+[CVC - Normal:AUROC:	0.5526890001283532]
+[CVC - Normal:log_loss:	0.5796792593598366]
+[CVC - Normal:accuracy@thresh=0.5:	0.74]
+[CVC - Normal:precision@thresh=0.5:	0.7386934673366834]
+[CVC - Normal:recall@thresh=0.5:	1.0]
+[Swan Ganz Catheter Present:AUPRC:	0.5142857142857142]
+[Swan Ganz Catheter Present:AUROC:	0.964467005076142]
+[Swan Ganz Catheter Present:log_loss:	0.04863365807294031]
+[Swan Ganz Catheter Present:accuracy@thresh=0.5:	0.985]
+[Swan Ganz Catheter Present:precision@thresh=0.5:	0.0]
+[Swan Ganz Catheter Present:recall@thresh=0.5:	0.0]
+[ETT - Abnormal:AUPRC: nan]
+WARNING:root:NaN or Inf found in input tensor.
+[ETT - Abnormal:AUROC: nan]
+WARNING:root:NaN or Inf found in input tensor.
+[ETT - Abnormal:log_loss: nan]
+WARNING:root:NaN or Inf found in input tensor.
+[ETT - Abnormal:accuracy@thresh=0.5: 1]
+[ETT - Abnormal:precision@thresh=0.5: 0]
+[ETT - Abnormal:recall@thresh=0.5: 0]
+[ETT - Borderline:AUPRC: 0.195]
+[ETT - Borderline:AUROC: 0.865]
+[ETT - Borderline:log_loss: 0.121]
+[ETT - Borderline:accuracy@thresh=0.5: 0.965]
+[ETT - Borderline:precision@thresh=0.5: 0]
+[ETT - Borderline:recall@thresh=0.5: 0]
+[ETT - Normal:AUPRC: 0.672]
+[ETT - Normal:AUROC: 0.938]
+[ETT - Normal:log_loss: 0.249]
+[ETT - Normal:accuracy@thresh=0.5: 0.89]
+[ETT - Normal:precision@thresh=0.5: 0.676]
+[ETT - Normal:recall@thresh=0.5: 0.676]
+[NGT - Abnormal:AUPRC: 0.0909]
+[NGT - Abnormal:AUROC: 0.95]
+[NGT - Abnormal:log_loss: 0.0268]
+[NGT - Abnormal:accuracy@thresh=0.5: 0.995]
+[NGT - Abnormal:precision@thresh=0.5: 0]
+[NGT - Abnormal:recall@thresh=0.5: 0]
+[NGT - Borderline:AUPRC: 0.112]
+[NGT - Borderline:AUROC: 0.812]
+[NGT - Borderline:log_loss: 0.103]
+[NGT - Borderline:accuracy@thresh=0.5: 0.975]
+[NGT - Borderline:precision@thresh=0.5: 0]
+[NGT - Borderline:recall@thresh=0.5: 0]
+[NGT - Incompletely Imaged:AUPRC: 0.395]
+[NGT - Incompletely Imaged:AUROC: 0.897]
+[NGT - Incompletely Imaged:log_loss: 0.165]
+[NGT - Incompletely Imaged:accuracy@thresh=0.5: 0.935]
+[NGT - Incompletely Imaged:precision@thresh=0.5: 0.5]
+[NGT - Incompletely Imaged:recall@thresh=0.5: 0.0769]
+[NGT - Normal:AUPRC: 0.473]
+[NGT - Normal:AUROC: 0.879]
+[NGT - Normal:log_loss: 0.264]
+[NGT - Normal:accuracy@thresh=0.5: 0.885]
+[NGT - Normal:precision@thresh=0.5: 0.562]
+[NGT - Normal:recall@thresh=0.5: 0.36]
+[CVC - Abnormal:AUPRC: 0.108]
+[CVC - Abnormal:AUROC: 0.485]
+[CVC - Abnormal:log_loss: 0.324]
+[CVC - Abnormal:accuracy@thresh=0.5: 0.905]
+[CVC - Abnormal:precision@thresh=0.5: 0]
+[CVC - Abnormal:recall@thresh=0.5: 0]
+[CVC - Borderline:AUPRC: 0.338]
+[CVC - Borderline:AUROC: 0.62]
+[CVC - Borderline:log_loss: 0.536]
+[CVC - Borderline:accuracy@thresh=0.5: 0.765]
+[CVC - Borderline:precision@thresh=0.5: 0.5]
+[CVC - Borderline:recall@thresh=0.5: 0.0213]
+[CVC - Normal:AUPRC: 0.768]
+[CVC - Normal:AUROC: 0.553]
+[CVC - Normal:log_loss: 0.58]
+[CVC - Normal:accuracy@thresh=0.5: 0.74]
+[CVC - Normal:precision@thresh=0.5: 0.739]
+[CVC - Normal:recall@thresh=0.5: 1]
+[Swan Ganz Catheter Present:AUPRC: 0.514]
+[Swan Ganz Catheter Present:AUROC: 0.964]
+[Swan Ganz Catheter Present:log_loss: 0.0486]
+[Swan Ganz Catheter Present:accuracy@thresh=0.5: 0.985]
+[Swan Ganz Catheter Present:precision@thresh=0.5: 0]
+[Swan Ganz Catheter Present:recall@thresh=0.5: 0]
+[start of epoch 4]
+[epoch: 4, iter: 0 / 23874, time: 0.00, loss: 0.243]
+[epoch: 4, iter: 1024 / 23874, time: 0.00, loss: 0.253]
+[epoch: 4, iter: 2048 / 23874, time: 0.00, loss: 0.239]
+[epoch: 4, iter: 3072 / 23874, time: 0.00, loss: 0.239]
+[epoch: 4, iter: 4096 / 23874, time: 0.00, loss: 0.248]
+[epoch: 4, iter: 5120 / 23874, time: 0.00, loss: 0.238]
+[epoch: 4, iter: 6144 / 23874, time: 0.00, loss: 0.243]
+[epoch: 4, iter: 7168 / 23874, time: 0.00, loss: 0.252]
+[epoch: 4, iter: 8192 / 23874, time: 0.00, loss: 0.243]
+[epoch: 4, iter: 9216 / 23874, time: 0.00, loss: 0.244]
+[epoch: 4, iter: 10240 / 23874, time: 0.00, loss: 0.241]
+[epoch: 4, iter: 11264 / 23874, time: 0.00, loss: 0.247]
+[epoch: 4, iter: 12288 / 23874, time: 0.00, loss: 0.253]
+Traceback (most recent call last):
+  File "/deep/group/cxr-transfer/SSL-methods/MedAug/finetune/train.py", line 2, in <module>
+    import torch
+ModuleNotFoundError: No module named 'torch'
+In base arg: read tasks from constants with dataset ranzcr_catheter: ['ETT - Abnormal', 'ETT - Borderline', 'ETT - Normal', 'NGT - Abnormal', 'NGT - Borderline', 'NGT - Incompletely Imaged', 'NGT - Normal', 'CVC - Abnormal', 'CVC - Borderline', 'CVC - Normal', 'Swan Ganz Catheter Present']
+Start Training ...
+Getting logger... log to path: /deep/group/cxr-transfer/SSL-methods/MedAug/experiments/ranzcr-SSL/train_log.txt
+pretrained checkpoint specified : /deep/group/cxr-transfer/SSL-methods/MedAug/ft_ckpt/checkpoint_0003.pth.tar
+Tasks: ['ETT - Abnormal', 'ETT - Borderline', 'ETT - Normal', 'NGT - Abnormal', 'NGT - Borderline', 'NGT - Incompletely Imaged', 'NGT - Normal', 'CVC - Abnormal', 'CVC - Borderline', 'CVC - Normal', 'Swan Ganz Catheter Present']
+========= MODEL ==========
+DataParallel(
+  (module): ResNet18(
+    (model): ResNet(
+      (conv1): Conv2d(3, 64, kernel_size=(7, 7), stride=(2, 2), padding=(3, 3), bias=False)
+      (bn1): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (relu): ReLU(inplace=True)
+      (maxpool): MaxPool2d(kernel_size=3, stride=2, padding=1, dilation=1, ceil_mode=False)
+      (layer1): Sequential(
+        (0): BasicBlock(
+          (conv1): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+          (bn1): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (relu): ReLU(inplace=True)
+          (conv2): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+          (bn2): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        )
+        (1): BasicBlock(
+          (conv1): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+          (bn1): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (relu): ReLU(inplace=True)
+          (conv2): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+          (bn2): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        )
+      )
+      (layer2): Sequential(
+        (0): BasicBlock(
+          (conv1): Conv2d(64, 128, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), bias=False)
+          (bn1): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (relu): ReLU(inplace=True)
+          (conv2): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+          (bn2): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (downsample): Sequential(
+            (0): Conv2d(64, 128, kernel_size=(1, 1), stride=(2, 2), bias=False)
+            (1): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          )
+        )
+        (1): BasicBlock(
+          (conv1): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+          (bn1): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (relu): ReLU(inplace=True)
+          (conv2): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+          (bn2): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        )
+      )
+      (layer3): Sequential(
+        (0): BasicBlock(
+          (conv1): Conv2d(128, 256, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), bias=False)
+          (bn1): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (relu): ReLU(inplace=True)
+          (conv2): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+          (bn2): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (downsample): Sequential(
+            (0): Conv2d(128, 256, kernel_size=(1, 1), stride=(2, 2), bias=False)
+            (1): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          )
+        )
+        (1): BasicBlock(
+          (conv1): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+          (bn1): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (relu): ReLU(inplace=True)
+          (conv2): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+          (bn2): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        )
+      )
+      (layer4): Sequential(
+        (0): BasicBlock(
+          (conv1): Conv2d(256, 512, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), bias=False)
+          (bn1): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (relu): ReLU(inplace=True)
+          (conv2): Conv2d(512, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+          (bn2): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (downsample): Sequential(
+            (0): Conv2d(256, 512, kernel_size=(1, 1), stride=(2, 2), bias=False)
+            (1): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          )
+        )
+        (1): BasicBlock(
+          (conv1): Conv2d(512, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+          (bn1): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (relu): ReLU(inplace=True)
+          (conv2): Conv2d(512, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+          (bn2): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        )
+      )
+      (avgpool): AdaptiveAvgPool2d(output_size=(1, 1))
+      (fc): None
+      (last_linear): Linear(in_features=512, out_features=1000, bias=True)
+    )
+    (pool): AdaptiveAvgPool2d(output_size=1)
+    (fc): Linear(in_features=512, out_features=11, bias=True)
+  )
+)
+valid /deep/group/cxr-transfer/datasets/ranzcr-clip-catheter-line-classification/valid.csv
+module.model.conv1.weight
+module.model.bn1.weight
+module.model.bn1.bias
+module.model.layer1.0.conv1.weight
+module.model.layer1.0.bn1.weight
+module.model.layer1.0.bn1.bias
+module.model.layer1.0.conv2.weight
+module.model.layer1.0.bn2.weight
+module.model.layer1.0.bn2.bias
+module.model.layer1.1.conv1.weight
+module.model.layer1.1.bn1.weight
+module.model.layer1.1.bn1.bias
+module.model.layer1.1.conv2.weight
+module.model.layer1.1.bn2.weight
+module.model.layer1.1.bn2.bias
+module.model.layer2.0.conv1.weight
+module.model.layer2.0.bn1.weight
+module.model.layer2.0.bn1.bias
+module.model.layer2.0.conv2.weight
+module.model.layer2.0.bn2.weight
+module.model.layer2.0.bn2.bias
+module.model.layer2.0.downsample.0.weight
+module.model.layer2.0.downsample.1.weight
+module.model.layer2.0.downsample.1.bias
+module.model.layer2.1.conv1.weight
+module.model.layer2.1.bn1.weight
+module.model.layer2.1.bn1.bias
+module.model.layer2.1.conv2.weight
+module.model.layer2.1.bn2.weight
+module.model.layer2.1.bn2.bias
+module.model.layer3.0.conv1.weight
+module.model.layer3.0.bn1.weight
+module.model.layer3.0.bn1.bias
+module.model.layer3.0.conv2.weight
+module.model.layer3.0.bn2.weight
+module.model.layer3.0.bn2.bias
+module.model.layer3.0.downsample.0.weight
+module.model.layer3.0.downsample.1.weight
+module.model.layer3.0.downsample.1.bias
+module.model.layer3.1.conv1.weight
+module.model.layer3.1.bn1.weight
+module.model.layer3.1.bn1.bias
+module.model.layer3.1.conv2.weight
+module.model.layer3.1.bn2.weight
+module.model.layer3.1.bn2.bias
+module.model.layer4.0.conv1.weight
+module.model.layer4.0.bn1.weight
+module.model.layer4.0.bn1.bias
+module.model.layer4.0.conv2.weight
+module.model.layer4.0.bn2.weight
+module.model.layer4.0.bn2.bias
+module.model.layer4.0.downsample.0.weight
+module.model.layer4.0.downsample.1.weight
+module.model.layer4.0.downsample.1.bias
+module.model.layer4.1.conv1.weight
+module.model.layer4.1.bn1.weight
+module.model.layer4.1.bn1.bias
+module.model.layer4.1.conv2.weight
+module.model.layer4.1.bn2.weight
+module.model.layer4.1.bn2.bias
+module.model.last_linear.weight
+module.model.last_linear.bias
+module.fc.weight
+module.fc.bias
+evaluator: loss function name: cross_entropy
+[start of epoch 1]
+Traceback (most recent call last):
+  File "train.py", line 186, in <module>
+    train(parser.parse_args())
+  File "train.py", line 170, in train
+    logits, embedding = model(inputs.to(args.device))
+  File "/sailhome/adgulati/miniconda3/envs/medaug-env/lib/python3.7/site-packages/torch/nn/modules/module.py", line 532, in __call__
+    result = self.forward(*input, **kwargs)
+  File "/sailhome/adgulati/miniconda3/envs/medaug-env/lib/python3.7/site-packages/torch/nn/parallel/data_parallel.py", line 150, in forward
+    return self.module(*inputs[0], **kwargs[0])
+  File "/sailhome/adgulati/miniconda3/envs/medaug-env/lib/python3.7/site-packages/torch/nn/modules/module.py", line 532, in __call__
+    result = self.forward(*input, **kwargs)
+  File "/deep/group/cxr-transfer/SSL-methods/MedAug/finetune/models/models.py", line 106, in forward
+    emb = self.model.features(x)
+  File "/sailhome/adgulati/miniconda3/envs/medaug-env/lib/python3.7/site-packages/pretrainedmodels/models/torchvision_models.py", line 322, in features
+    x = self.conv1(input)
+  File "/sailhome/adgulati/miniconda3/envs/medaug-env/lib/python3.7/site-packages/torch/nn/modules/module.py", line 532, in __call__
+    result = self.forward(*input, **kwargs)
+  File "/sailhome/adgulati/miniconda3/envs/medaug-env/lib/python3.7/site-packages/torch/nn/modules/conv.py", line 345, in forward
+    return self.conv2d_forward(input, self.weight)
+  File "/sailhome/adgulati/miniconda3/envs/medaug-env/lib/python3.7/site-packages/torch/nn/modules/conv.py", line 342, in conv2d_forward
+    self.padding, self.dilation, self.groups)
+  File "/sailhome/adgulati/miniconda3/envs/medaug-env/lib/python3.7/site-packages/torch/utils/data/_utils/signal_handling.py", line 66, in handler
+    _error_if_any_worker_fails()
+RuntimeError: DataLoader worker (pid 2829323) is killed by signal: Killed. 

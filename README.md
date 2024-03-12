@@ -99,9 +99,10 @@ The library supports finetuning, linear probing, and logistic regression based p
 The results obtained from finetuning and linear probing are benchmarked across various ChestXray downstream tasks. Below are the AUROC scores:
 
 #### Finetuning Results
-
+![Finetuning Results](https://github.com/GulatiAditya/cxrlearn/blob/main/imgs/finetuning.png)
 
 #### Linear Probing Results
+![Linear Probing Results](https://github.com/GulatiAditya/cxrlearn/blob/main/imgs/linear_probing.png)
 
 ### 6. References
 

@@ -2,7 +2,7 @@
 
 cxrlearn is based on the work "Self-Supervised Pretraining Enables High-Performance Chest X-Ray Interpretation Across Clinical Distributions" [(Paper Link)](https://www.medrxiv.org/content/10.1101/2022.11.19.22282519v1).
 
-cxrleanr is a library for self-supervised learning, finetuning, and probing on chest X-ray images. It supports various state-of-the-art self-supervised models, enabling high-performance chest X-ray interpretation across clinical distributions. With cxrlearn, you can effortlessly train and evaluate models for various downstream tasks in chest X-ray analysis.
+cxrlearn is a library for self-supervised learning, finetuning, and probing on chest X-ray images. It supports various state-of-the-art self-supervised models, enabling high-performance chest X-ray interpretation across clinical distributions. With cxrlearn, you can effortlessly train and evaluate models for various downstream tasks in chest X-ray analysis.
 
 ## Prerequisites
 
